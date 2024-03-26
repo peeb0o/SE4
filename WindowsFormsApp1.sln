@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.34601.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{DF4EA8EC-B352-42EB-B5EE-B0DDE2FC4D97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE4 Drawing Program", "WindowsFormsApp1\SE4 Drawing Program.csproj", "{DF4EA8EC-B352-42EB-B5EE-B0DDE2FC4D97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,3 +10,4 @@ namespace SE4
     {
         public abstract void Execute(ShapeFactory shapeManager, string[] parameters);
     }
+}

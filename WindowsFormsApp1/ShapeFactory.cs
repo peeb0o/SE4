@@ -10,7 +10,7 @@ namespace SE4
 {
     public class ShapeFactory
     {
-        private readonly Panel drawingPanel;
+        private Panel drawingPanel;
 
         public ShapeFactory(Panel panel)
         {

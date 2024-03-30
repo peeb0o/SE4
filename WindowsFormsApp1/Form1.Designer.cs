@@ -1,5 +1,6 @@
-﻿
-namespace WindowsFormsApp1
+﻿using System.Windows.Forms;
+
+namespace SE4
 {
     partial class Form1
     {
@@ -29,43 +30,44 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.runButton = new Button();
+            this.drawPanel = new Panel();
+            this.singleCommandTextBox = new TextBox();
+            this.multiLineTextBox = new RichTextBox();
             this.SuspendLayout();
             // 
-            // button1
+            // runButton
             // 
-            this.button1.Location = new System.Drawing.Point(22, 407);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 22);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Run";
-            this.button1.UseVisualStyleBackColor = true;
+            this.runButton.Location = new System.Drawing.Point(22, 407);
+            this.runButton.Name = "button1";
+            this.runButton.Size = new System.Drawing.Size(41, 22);
+            this.runButton.TabIndex = 0;
+            this.runButton.Text = "Run";
+            this.runButton.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // drawPanel
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel1.Location = new System.Drawing.Point(456, 31);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(385, 316);
-            this.panel1.TabIndex = 1;
+            this.drawPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.drawPanel.Location = new System.Drawing.Point(456, 31);
+            this.drawPanel.Name = "panel1";
+            this.drawPanel.Size = new System.Drawing.Size(385, 316);
+            this.drawPanel.TabIndex = 1;
             // 
-            // panel2
+            // singleCommandTextBox
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel2.Location = new System.Drawing.Point(22, 31);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(385, 316);
-            this.panel2.TabIndex = 2;
+            this.singleCommandTextBox.Location = new System.Drawing.Point(22, 374);
+            this.singleCommandTextBox.Name = "textBox1";
+            this.singleCommandTextBox.Size = new System.Drawing.Size(385, 20);
+            this.singleCommandTextBox.TabIndex = 3;
             // 
-            // textBox1
+            // multiLineTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(22, 374);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(385, 20);
-            this.textBox1.TabIndex = 3;
+            this.multiLineTextBox.Location = new System.Drawing.Point(22, 31);
+            this.multiLineTextBox.Name = "richTextBox1";
+            this.multiLineTextBox.Size = new System.Drawing.Size(385, 316);
+            this.multiLineTextBox.TabIndex = 4;
+            this.multiLineTextBox.Text = "";
+            this.multiLineTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // Form1
             // 
@@ -73,10 +75,10 @@ namespace WindowsFormsApp1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(866, 451);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.multiLineTextBox);
+            this.Controls.Add(this.singleCommandTextBox);
+            this.Controls.Add(this.drawPanel);
+            this.Controls.Add(this.runButton);
             this.Name = "Form1";
             this.Text = "Form";
             this.ResumeLayout(false);
@@ -86,10 +88,10 @@ namespace WindowsFormsApp1
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox1;
+        private Button runButton;
+        private Panel drawPanel;
+        private TextBox singleCommandTextBox;
+        private RichTextBox multiLineTextBox;
     }
 }
 

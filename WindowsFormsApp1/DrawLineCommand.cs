@@ -12,10 +12,10 @@ namespace SE4
     {
         public override void Execute(ShapeFactory shapeFactory, string[] parameters)
         {
-            if (parameters.Length >= 2)
+            if (parameters.Length >= 3)
             {
-                string[] startPoint = parameters[0].Split(',');
-                string[] endPoint = parameters[1].Split(',');
+                string[] startPoint = parameters[1].Split(',');
+                string[] endPoint = parameters[2].Split(',');
 
                 if (startPoint.Length == 2 && endPoint.Length == 2 &&
                     int.TryParse(startPoint[0], out int startX) &&

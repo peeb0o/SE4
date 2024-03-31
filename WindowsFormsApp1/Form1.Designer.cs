@@ -44,6 +44,8 @@ namespace SE4
             this.runButton.TabIndex = 0;
             this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = true;
+            // Maybe need to change this method as this will run multiple commands not one at a time
+            this.runButton.Click += new System.EventHandler(this.runButtonClicked); //run button calls method to parse commands 
             // 
             // drawPanel
             // 

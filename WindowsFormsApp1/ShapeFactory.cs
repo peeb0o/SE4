@@ -10,28 +10,28 @@ namespace SE4
 {
     public class ShapeFactory
     {
-        private Panel drawingPanel;
+        private Panel drawPanel;
 
         public ShapeFactory(Panel panel)
         {
-            drawingPanel = panel;
+            drawPanel = panel;
         }
 
         public void DrawLine(Point startPoint, Point endPoint)
         {
-            Graphics graphics = drawingPanel.CreateGraphics();
+            Graphics graphics = drawPanel.CreateGraphics();
             graphics.DrawLine(Pens.Black, startPoint, endPoint);
         }
 
         public void DrawRectangle(Rectangle rectangle)
         {
-            Graphics graphics = drawingPanel.CreateGraphics();
+            Graphics graphics = drawPanel.CreateGraphics();
             graphics.DrawRectangle(Pens.Black, rectangle);
         }
 
         public void DrawEllipse(Rectangle rectangle)
         {
-            Graphics graphics = drawingPanel.CreateGraphics();
+            Graphics graphics = drawPanel.CreateGraphics();
             graphics.DrawEllipse(Pens.Black, rectangle);
         }
     }

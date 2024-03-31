@@ -24,11 +24,6 @@ namespace SE4
             commandParser = new CommandParser(shapeManager);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -36,16 +31,35 @@ namespace SE4
 
         private void runButtonClicked(object sender, EventArgs e)
         {
-            string[] commands = singleCommandTextBox.Lines;
-
-            foreach (string command in commands)
+            // if to check for commands in singleline textbox
+            if (!string.IsNullOrWhiteSpace(singleCommandTextBox.Text))
             {
-                if(!string.IsNullOrWhiteSpace(command))
+                string[] commands = singleCommandTextBox.Lines;
+
+                foreach (string command in commands)
                 {
-                    commandParser.ParseCommand(command);
-                    Console.WriteLine("Parser called");
-                }    
+                    if (!string.IsNullOrWhiteSpace(command))
+                    {
+                        commandParser.ParseCommand(command);
+                        Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                    }
+                }
             }
+
+            if (!string.IsNullOrWhiteSpace(multiLineTextBox.Text))
+            {
+                string[] commands = multiLineTextBox.Lines;
+
+                foreach (string command in commands)
+                {
+                    if (!string.IsNullOrWhiteSpace(command))
+                    {
+                        commandParser.ParseCommand(command);
+                        Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                    }
+                }
+            }
+
         }
     }
 }

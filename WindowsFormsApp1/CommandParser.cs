@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SE4
 {
@@ -24,10 +25,9 @@ namespace SE4
             string[] parts = command.Split(' ');
 
             //Will parse command based on the first part that is read 
-            string commandType = parts[0].ToLower();
+            string commandType = parts[0].ToLower().Trim();
 
             //parse commands using if statements
-
             if (commandType == "drawline")
             {
                 drawLineCommand.Execute(shapeFactory, parts);

@@ -34,16 +34,14 @@ namespace SE4
             // if to check for commands in singleline textbox
             if (!string.IsNullOrWhiteSpace(singleCommandTextBox.Text))
             {
-                string[] commands = singleCommandTextBox.Lines;
+                string command = singleCommandTextBox.Text.Trim();
 
-                foreach (string command in commands)
+                if (!string.IsNullOrWhiteSpace(command))
                 {
-                    if (!string.IsNullOrWhiteSpace(command))
-                    {
-                        commandParser.ParseCommand(command);
-                        Console.WriteLine("Parser called"); // for debugging purposes - remove later
-                    }
+                    commandParser.ParseCommand(command);
+                    Console.WriteLine("Parser called"); // for debugging purposes - remove later
                 }
+
             }
 
             if (!string.IsNullOrWhiteSpace(multiLineTextBox.Text))

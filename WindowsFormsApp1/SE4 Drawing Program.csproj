@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PanelUtilities.cs" />
     <Compile Include="CommandParser.cs" />
     <Compile Include="DrawLineCommand.cs" />
     <Compile Include="Command.cs" />

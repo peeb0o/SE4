@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SE4
 {
@@ -12,7 +13,7 @@ namespace SE4
     {
         public override void Execute(ShapeFactory shapeFactory, string[] parameters)
         {
-            if (parameters.Length >= 3)
+            if (parameters.Length == 3)
             {
                 string[] startPoint = parameters[1].Split(',');
                 string[] endPoint = parameters[2].Split(',');
@@ -25,6 +26,10 @@ namespace SE4
                 {
                     shapeFactory.DrawLine(new Point(startX, startY), new Point(endX, endY));
                 }
+            }
+            else
+            {
+                PanelUtilities.WriteToPanel(shapeFactory.drawPanel, "Invalid number of parameters");
             }
         }
     }

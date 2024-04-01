@@ -62,6 +62,7 @@ namespace SE4
             this.singleCommandTextBox.Size = new System.Drawing.Size(385, 20);
             this.singleCommandTextBox.TabIndex = 3;
             this.singleCommandTextBox.KeyDown += singleCommandTextBoxEnterPressed;
+            this.singleCommandTextBox.TextChanged += singleCommandTextBoxRunCommand;
             // 
             // multiLineTextBox
             // 

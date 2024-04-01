@@ -72,7 +72,32 @@ namespace SE4
                     Console.WriteLine("Parser called"); // for debugging purposes - remove later
                 }
                 singleCommandTextBox.Clear();
+
+                if (runCommandEntered == true)
+                {
+                    string[] commands = multiLineTextBox.Lines;
+
+                    foreach (string cmd in commands)
+                    {
+                        if (!string.IsNullOrWhiteSpace(cmd))
+                        {
+                            commandParser.ParseCommand(cmd);
+                            Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                        }
+                    }
+                    singleCommandTextBox.Clear();
+                }
             }
+        }
+
+        private bool runCommandEntered = false;
+        private void singleCommandTextBoxRunCommand(object sender, EventArgs e)
+        {
+            //string command = singleCommandTextBox.Text.Trim();
+            if (singleCommandTextBox.Text.Trim().ToLower().Equals("run"))
+            {
+                runCommandEntered = true;
+            }            
         }
     }
 }

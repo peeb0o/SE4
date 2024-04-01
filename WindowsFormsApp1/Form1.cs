@@ -14,6 +14,7 @@ namespace SE4
     {
         private ShapeFactory shapeManager;
         private CommandParser commandParser;
+        private bool runCommandEntered = false;
 
         public Form1()
         {
@@ -90,7 +91,6 @@ namespace SE4
             }
         }
 
-        private bool runCommandEntered = false;
         private void singleCommandTextBoxRunCommand(object sender, EventArgs e)
         {
             //string command = singleCommandTextBox.Text.Trim();

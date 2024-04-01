@@ -31,55 +31,65 @@ namespace SE4
         /// </summary>
         private void InitializeComponent()
         {
-            this.runButton = new Button();
-            this.drawPanel = new Panel();
-            this.singleCommandTextBox = new TextBox();
-            this.multiLineTextBox = new RichTextBox();
+            this.runButton = new System.Windows.Forms.Button();
+            this.drawPanel = new System.Windows.Forms.Panel();
+            this.singleCommandTextBox = new System.Windows.Forms.TextBox();
+            this.multiLineTextBox = new System.Windows.Forms.RichTextBox();
+            this.Save = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // runButton
             // 
-            this.runButton.Location = new Point(22, 407);
+            this.runButton.Location = new System.Drawing.Point(22, 407);
             this.runButton.Name = "runButton";
-            this.runButton.Size = new Size(41, 22);
+            this.runButton.Size = new System.Drawing.Size(41, 22);
             this.runButton.TabIndex = 0;
             this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = true;
-            // Maybe need to change this method as this will run multiple commands not one at a time
-            this.runButton.Click += new System.EventHandler(this.runButtonClicked); //run button calls method to parse commands
+            this.runButton.Click += new System.EventHandler(this.runButtonClicked);
             // 
             // drawPanel
             // 
-            this.drawPanel.BackColor = SystemColors.ButtonShadow;
-            this.drawPanel.Location = new Point(456, 31);
+            this.drawPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.drawPanel.Location = new System.Drawing.Point(456, 31);
             this.drawPanel.Name = "drawPanel";
-            this.drawPanel.Size = new Size(385, 316);
+            this.drawPanel.Size = new System.Drawing.Size(385, 316);
             this.drawPanel.TabIndex = 1;
             // 
             // singleCommandTextBox
             // 
-            this.singleCommandTextBox.Location = new Point(22, 374);
+            this.singleCommandTextBox.Location = new System.Drawing.Point(22, 374);
             this.singleCommandTextBox.Name = "singleCommandTextBox";
-            this.singleCommandTextBox.Size = new Size(385, 20);
+            this.singleCommandTextBox.Size = new System.Drawing.Size(385, 20);
             this.singleCommandTextBox.TabIndex = 3;
-            this.singleCommandTextBox.KeyDown += singleCommandTextBoxEnterPressed;
-            this.singleCommandTextBox.TextChanged += singleCommandTextBoxRunCommand;
+            this.singleCommandTextBox.TextChanged += new System.EventHandler(this.singleCommandTextBoxRunCommand);
+            this.singleCommandTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.singleCommandTextBoxEnterPressed);
             // 
             // multiLineTextBox
             // 
-            this.multiLineTextBox.Location = new Point(22, 31);
+            this.multiLineTextBox.Location = new System.Drawing.Point(22, 31);
             this.multiLineTextBox.Name = "multiLineTextBox";
-            this.multiLineTextBox.Size = new Size(385, 316);
+            this.multiLineTextBox.Size = new System.Drawing.Size(385, 316);
             this.multiLineTextBox.TabIndex = 4;
             this.multiLineTextBox.Text = "";
             this.multiLineTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // Save
+            // 
+            this.Save.Location = new System.Drawing.Point(22, 13);
+            this.Save.Name = "Save";
+            this.Save.Size = new System.Drawing.Size(75, 23);
+            this.Save.TabIndex = 5;
+            this.Save.Text = "Save";
+            this.Save.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = SystemColors.Control;
-            this.ClientSize = new Size(866, 451);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(866, 451);
+            this.Controls.Add(this.Save);
             this.Controls.Add(this.multiLineTextBox);
             this.Controls.Add(this.singleCommandTextBox);
             this.Controls.Add(this.drawPanel);
@@ -97,6 +107,7 @@ namespace SE4
         private Panel drawPanel;
         private TextBox singleCommandTextBox;
         private RichTextBox multiLineTextBox;
+        private Button Save;
     }
 }
 

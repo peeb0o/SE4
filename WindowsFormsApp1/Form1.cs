@@ -57,7 +57,22 @@ namespace SE4
                     }
                 }
             }
+        }
 
+        private void singleCommandTextBoxEnterPressed(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                string command = singleCommandTextBox.Text.Trim();
+                if (!string.IsNullOrEmpty(command))
+                {
+                    commandParser.ParseCommand(command);
+                    Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                }
+                singleCommandTextBox.Clear();
+            }
         }
     }
 }

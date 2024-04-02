@@ -11,28 +11,50 @@ namespace SE4
     public class ShapeFactory
     {
         public Panel drawPanel;
+        private List<Shape> shapes = new List<Shape>();
+
 
         public ShapeFactory(Panel panel)
         {
             drawPanel = panel;
+            drawPanel.Paint += DrawPanel_Paint;
+        }
+        private void DrawPanel_Paint(object sender, PaintEventArgs e)
+        {
+            // Draw shapes onto the panel when it is painted
+            DrawShapes(e.Graphics);
         }
 
-        public void DrawLine(Point startPoint, Point endPoint)
+        public void ExecuteCommand(Command command, string[] parameters)
         {
-            Graphics graphics = drawPanel.CreateGraphics();
-            graphics.DrawLine(Pens.Black, startPoint, endPoint);
+            command.Execute(this, parameters);
+            drawPanel.Invalidate(); // Request a repaint of the panel
         }
 
-        public void DrawRectangle(Rectangle rectangle)
+        public void AddShape(Shape shape)
         {
-            Graphics graphics = drawPanel.CreateGraphics();
-            graphics.DrawRectangle(Pens.Black, rectangle);
+            shapes.Add(shape);
+            drawPanel.Invalidate(); // Request a repaint of the panel
         }
 
-        public void DrawEllipse(Rectangle rectangle)
+        public void RemoveShape(Shape shape)
         {
-            Graphics graphics = drawPanel.CreateGraphics();
-            graphics.DrawEllipse(Pens.Black, rectangle);
+            shapes.Remove(shape);
+            drawPanel.Invalidate(); // Request a repaint of the panel
+        }
+
+        public void ClearShapes()
+        {
+            shapes.Clear();
+            drawPanel.Invalidate(); // Request a repaint of the panel
+        }
+
+        public void DrawShapes(Graphics graphics)
+        {
+            foreach (var shape in shapes)
+            {
+                shape.draw(graphics);
+            }
         }
     }
 }

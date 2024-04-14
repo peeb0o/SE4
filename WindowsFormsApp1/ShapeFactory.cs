@@ -12,49 +12,54 @@ namespace SE4
     {
         public Panel drawPanel;
         private List<Shape> shapes = new List<Shape>();
-
+        private Bitmap drawBitmap;
 
         public ShapeFactory(Panel panel)
         {
             drawPanel = panel;
+            drawBitmap = new Bitmap(panel.Width, panel.Height);
             drawPanel.Paint += DrawPanel_Paint;
         }
         private void DrawPanel_Paint(object sender, PaintEventArgs e)
         {
             // Draw shapes onto the panel when it is painted
-            DrawShapes(e.Graphics);
+            e.Graphics.DrawImage(drawBitmap, Point.Empty);
         }
 
         public void ExecuteCommand(Command command, string[] parameters)
         {
             command.Execute(this, parameters);
-            drawPanel.Invalidate(); // Request a repaint of the panel
         }
 
         public void AddShape(Shape shape)
         {
             shapes.Add(shape);
-            drawPanel.Invalidate(); // Request a repaint of the panel
+            RedrawBitmap();
         }
 
         public void RemoveShape(Shape shape)
         {
             shapes.Remove(shape);
-            drawPanel.Invalidate(); // Request a repaint of the panel
+            RedrawBitmap();
         }
 
         public void ClearShapes()
         {
             shapes.Clear();
-            drawPanel.Invalidate(); // Request a repaint of the panel
+            RedrawBitmap();
         }
 
-        public void DrawShapes(Graphics graphics)
+        public void RedrawBitmap()
         {
-            foreach (var shape in shapes)
+            using (Graphics graphics = Graphics.FromImage(drawBitmap))
             {
-                shape.draw(graphics);
+                foreach (var shape in shapes)
+                {
+                    shape.draw(graphics);
+                }
             }
+
+            drawPanel.Invalidate();
         }
     }
 }

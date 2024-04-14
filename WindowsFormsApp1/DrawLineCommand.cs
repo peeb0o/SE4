@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Shapes;
 
 namespace SE4
 {
@@ -24,7 +25,11 @@ namespace SE4
                     int.TryParse(endPoint[0], out int endX) &&
                     int.TryParse(endPoint[1], out int endY))
                 {
-                    shapeFactory.DrawLine(new Point(startX, startY), new Point(endX, endY));
+                    var line = new Line(new Point(startX, startY), new Point(endX, endY));
+                    shapeFactory.AddShape(line);
+                } else
+                {
+                    PanelUtilities.WriteToPanel(shapeFactory.drawPanel, "Invalid number of parameters");
                 }
             }
             else

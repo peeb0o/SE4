@@ -99,5 +99,23 @@ namespace SE4
                 runCommandEntered = true;
             }            
         }
+
+        private void saveButtonClicked(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+
+            save.Title = "Save File";
+            save.InitialDirectory = @"C:\Documents";
+            save.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            save.DefaultExt = "txt";
+            save.AddExtension = true;
+
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.StreamWriter file = new System.IO.StreamWriter(save.FileName.ToString());
+                file.WriteLine(multiLineTextBox.Text);
+                file.Close();
+            }
+        }
     }
 }

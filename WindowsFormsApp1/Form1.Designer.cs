@@ -36,6 +36,7 @@ namespace SE4
             this.singleCommandTextBox = new System.Windows.Forms.TextBox();
             this.multiLineTextBox = new System.Windows.Forms.RichTextBox();
             this.Save = new System.Windows.Forms.Button();
+            this.Load = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // runButton
@@ -69,7 +70,7 @@ namespace SE4
             // 
             // multiLineTextBox
             // 
-            this.multiLineTextBox.Location = new System.Drawing.Point(0, 31);
+            this.multiLineTextBox.Location = new System.Drawing.Point(12, 31);
             this.multiLineTextBox.Name = "multiLineTextBox";
             this.multiLineTextBox.Size = new System.Drawing.Size(223, 331);
             this.multiLineTextBox.TabIndex = 4;
@@ -78,12 +79,22 @@ namespace SE4
             // 
             // Save
             // 
-            this.Save.Location = new System.Drawing.Point(12, 2);
+            this.Save.Location = new System.Drawing.Point(710, 413);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
             this.Save.TabIndex = 5;
             this.Save.Text = "Save";
             this.Save.UseVisualStyleBackColor = true;
+            this.Save.Click += new System.EventHandler(this.saveButtonClicked);
+            // 
+            // Load
+            // 
+            this.Load.Location = new System.Drawing.Point(791, 413);
+            this.Load.Name = "Load";
+            this.Load.Size = new System.Drawing.Size(75, 23);
+            this.Load.TabIndex = 6;
+            this.Load.Text = "Load";
+            this.Load.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -91,6 +102,7 @@ namespace SE4
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(874, 448);
+            this.Controls.Add(this.Load);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.multiLineTextBox);
             this.Controls.Add(this.singleCommandTextBox);
@@ -110,6 +122,7 @@ namespace SE4
         private TextBox singleCommandTextBox;
         private RichTextBox multiLineTextBox;
         private Button Save;
+        private Button Load;
     }
 }
 

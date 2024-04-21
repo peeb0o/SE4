@@ -13,6 +13,9 @@ namespace SE4
         public Panel drawPanel;
         private List<Shape> shapes = new List<Shape>();
         private Bitmap drawBitmap;
+        private Pen pen = new Pen();
+        public int penX { get; private set; }
+        public int penY { get; private set; }
 
         public ShapeFactory(Panel panel)
         {
@@ -24,6 +27,8 @@ namespace SE4
         {
             // Draw shapes onto the panel when it is painted
             e.Graphics.DrawImage(drawBitmap, Point.Empty);
+
+            pen.Draw(e.Graphics, penX, penY);
         }
 
         public void ExecuteCommand(Command command, string[] parameters)
@@ -35,18 +40,43 @@ namespace SE4
         {
             shapes.Add(shape);
             RedrawBitmap();
+            drawPanel.Refresh();
         }
 
-        public void RemoveShape(Shape shape)
-        {
-            shapes.Remove(shape);
-            RedrawBitmap();
-        }
-
-        public void ClearShapes()
+        public void Clear()
         {
             shapes.Clear();
-            RedrawBitmap();
+            
+            using (Graphics graphics = Graphics.FromImage(drawBitmap))
+            {
+                graphics.Clear(SystemColors.ButtonShadow);
+            }
+
+            drawPanel.Refresh();
+        }
+
+        public void Reset()
+        {
+            int x = 0;
+            int y = 0;
+            penX = x;
+            penY = y;
+            drawPanel.Refresh();
+        }
+
+        public void DrawTo(int startX, int startY, int endX, int endY)
+        {
+            using (Graphics graphics = Graphics.FromImage(drawBitmap))
+            {
+                graphics.DrawLine(Pens.Black, startX, startY, endX, endY);
+            }
+        }
+
+        public void MovePen(int x, int y)
+        {
+            penX = x;
+            penY = y;
+            drawPanel.Refresh(); 
         }
 
         public void RedrawBitmap()
@@ -58,8 +88,6 @@ namespace SE4
                     shape.draw(graphics);
                 }
             }
-
-            drawPanel.Invalidate();
         }
     }
 }

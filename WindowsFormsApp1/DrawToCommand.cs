@@ -10,23 +10,21 @@ using System.Windows.Shapes;
 namespace SE4
 {
     // Command for drawing a line
-    public class DrawLineCommand : Command
+    public class DrawToCommand : Command
     {
         public override void Execute(ShapeFactory shapeFactory, string[] parameters)
         {
-            if (parameters.Length == 3)
+            if (parameters.Length == 2)
             {
-                string[] startPoint = parameters[1].Split(',');
-                string[] endPoint = parameters[2].Split(',');
+                string[] coordinates = parameters[1].Split(',');
 
-                if (startPoint.Length == 2 && endPoint.Length == 2 &&
-                    int.TryParse(startPoint[0], out int startX) &&
-                    int.TryParse(startPoint[1], out int startY) &&
-                    int.TryParse(endPoint[0], out int endX) &&
-                    int.TryParse(endPoint[1], out int endY))
+                if (coordinates.Length == 2 && int.TryParse(coordinates[0], out int x) && int.TryParse(coordinates[1], out int y))
                 {
-                    var line = new Line(new Point(startX, startY), new Point(endX, endY));
-                    shapeFactory.AddShape(line);
+
+                    shapeFactory.DrawTo(shapeFactory.penX, shapeFactory.penY, x, y);
+
+                    shapeFactory.MovePen(x, y);
+
                 } else
                 {
                     PanelUtilities.WriteToPanel(shapeFactory.drawPanel, "Invalid number of parameters");

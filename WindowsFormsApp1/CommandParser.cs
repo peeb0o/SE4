@@ -11,12 +11,14 @@ namespace SE4
     public class CommandParser
     {
         private ShapeFactory shapeFactory;
-        private DrawLineCommand drawLineCommand;
+        private DrawToCommand drawToCommand;
+        private PenCommand penCommand;
 
         public CommandParser(ShapeFactory factory)
         {
-            shapeFactory = factory;
-            drawLineCommand = new DrawLineCommand();
+            this.shapeFactory = factory;
+            drawToCommand = new DrawToCommand();
+            penCommand = new PenCommand();
         }
 
         public void ParseCommand(string command)
@@ -28,10 +30,33 @@ namespace SE4
             string commandType = parts[0].ToLower().Trim();
 
             //parse commands using if statements
-            if (commandType == "drawline")
+            if (parts.Length >= 1)
             {
-                drawLineCommand.Execute(shapeFactory, parts);
-            }
+
+                if (commandType == "drawto")
+                {
+                    drawToCommand.Execute(shapeFactory, parts);
+                }
+
+                else if (commandType == "moveto")
+                {
+                    penCommand.Execute(shapeFactory, parts);
+                }
+
+                else if (commandType == "clear")
+                {
+                    shapeFactory.Clear();
+                }
+
+                else if (commandType == "reset")
+                {
+                    shapeFactory.Reset();
+                }
+                else
+                {
+                    PanelUtilities.WriteToPanel(shapeFactory.drawPanel, "Invalid Command");                 
+                }
+            }          
         }
     }
 }

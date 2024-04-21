@@ -95,6 +95,7 @@ namespace SE4
             this.Load.TabIndex = 6;
             this.Load.Text = "Load";
             this.Load.UseVisualStyleBackColor = true;
+            this.Load.Click += new System.EventHandler(this.loadButtonClicked);
             // 
             // Form1
             // 

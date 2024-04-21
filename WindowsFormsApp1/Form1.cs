@@ -117,5 +117,20 @@ namespace SE4
                 file.Close();
             }
         }
+
+        private void loadButtonClicked(object sender, EventArgs e)
+        {
+            OpenFileDialog load = new OpenFileDialog();
+
+            load.Title = "Load File";
+            load.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+
+            if(load.ShowDialog() == DialogResult.OK)
+            {
+                string file = load.FileName;
+                string text = System.IO.File.ReadAllText(file);
+                multiLineTextBox.Text = text;
+            }
+        }
     }
 }

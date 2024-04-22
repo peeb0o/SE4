@@ -34,17 +34,22 @@ namespace SE4
             this.runButton = new System.Windows.Forms.Button();
             this.drawPanel = new System.Windows.Forms.Panel();
             this.singleCommandTextBox = new System.Windows.Forms.TextBox();
-            this.multiLineTextBox = new System.Windows.Forms.RichTextBox();
             this.Save = new System.Windows.Forms.Button();
             this.Load = new System.Windows.Forms.Button();
+            this.multiLineTextBox = new System.Windows.Forms.RichTextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // runButton
             // 
-            this.runButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.runButton.Location = new System.Drawing.Point(12, 403);
+            this.runButton.Location = new System.Drawing.Point(3, 57);
             this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(63, 22);
+            this.runButton.Size = new System.Drawing.Size(80, 22);
             this.runButton.TabIndex = 0;
             this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = true;
@@ -52,34 +57,28 @@ namespace SE4
             // 
             // drawPanel
             // 
+            this.drawPanel.AutoSize = true;
             this.drawPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.drawPanel.Location = new System.Drawing.Point(253, 31);
+            this.drawPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.drawPanel.Location = new System.Drawing.Point(363, 6);
             this.drawPanel.Name = "drawPanel";
-            this.drawPanel.Size = new System.Drawing.Size(613, 331);
+            this.drawPanel.Size = new System.Drawing.Size(821, 640);
             this.drawPanel.TabIndex = 1;
+            this.drawPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.drawPanel_Paint);
             // 
             // singleCommandTextBox
             // 
-            this.singleCommandTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.singleCommandTextBox.Location = new System.Drawing.Point(12, 377);
+            this.singleCommandTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.singleCommandTextBox.Location = new System.Drawing.Point(3, 3);
             this.singleCommandTextBox.Name = "singleCommandTextBox";
-            this.singleCommandTextBox.Size = new System.Drawing.Size(385, 20);
+            this.singleCommandTextBox.Size = new System.Drawing.Size(342, 20);
             this.singleCommandTextBox.TabIndex = 3;
             this.singleCommandTextBox.TextChanged += new System.EventHandler(this.singleCommandTextBoxRunCommand);
             this.singleCommandTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.singleCommandTextBoxEnterPressed);
             // 
-            // multiLineTextBox
-            // 
-            this.multiLineTextBox.Location = new System.Drawing.Point(12, 31);
-            this.multiLineTextBox.Name = "multiLineTextBox";
-            this.multiLineTextBox.Size = new System.Drawing.Size(223, 331);
-            this.multiLineTextBox.TabIndex = 4;
-            this.multiLineTextBox.Text = "";
-            this.multiLineTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-            // 
             // Save
             // 
-            this.Save.Location = new System.Drawing.Point(710, 413);
+            this.Save.Location = new System.Drawing.Point(94, 3);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
             this.Save.TabIndex = 5;
@@ -89,7 +88,7 @@ namespace SE4
             // 
             // Load
             // 
-            this.Load.Location = new System.Drawing.Point(791, 413);
+            this.Load.Location = new System.Drawing.Point(3, 3);
             this.Load.Name = "Load";
             this.Load.Size = new System.Drawing.Size(75, 23);
             this.Load.TabIndex = 6;
@@ -97,20 +96,82 @@ namespace SE4
             this.Load.UseVisualStyleBackColor = true;
             this.Load.Click += new System.EventHandler(this.loadButtonClicked);
             // 
+            // multiLineTextBox
+            // 
+            this.multiLineTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.multiLineTextBox.Location = new System.Drawing.Point(6, 6);
+            this.multiLineTextBox.Name = "multiLineTextBox";
+            this.multiLineTextBox.Size = new System.Drawing.Size(348, 640);
+            this.multiLineTextBox.TabIndex = 4;
+            this.multiLineTextBox.Text = "";
+            this.multiLineTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel1.Controls.Add(this.multiLineTextBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.drawPanel, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1190, 769);
+            this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.singleCommandTextBox, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.runButton, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 655);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(348, 108);
+            this.tableLayoutPanel2.TabIndex = 5;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.Load, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.Save, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(363, 655);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(183, 108);
+            this.tableLayoutPanel3.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(874, 448);
-            this.Controls.Add(this.Load);
-            this.Controls.Add(this.Save);
-            this.Controls.Add(this.multiLineTextBox);
-            this.Controls.Add(this.singleCommandTextBox);
-            this.Controls.Add(this.drawPanel);
-            this.Controls.Add(this.runButton);
+            this.ClientSize = new System.Drawing.Size(1190, 769);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "Form";
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,9 +182,12 @@ namespace SE4
         private Button runButton;
         private Panel drawPanel;
         private TextBox singleCommandTextBox;
-        private RichTextBox multiLineTextBox;
         private Button Save;
         private Button Load;
+        private RichTextBox multiLineTextBox;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 }
 

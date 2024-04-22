@@ -13,12 +13,14 @@ namespace SE4
         private ShapeFactory shapeFactory;
         private DrawToCommand drawToCommand;
         private PenCommand penCommand;
+        private CircleCommand circleCommand;
 
         public CommandParser(ShapeFactory factory)
         {
             this.shapeFactory = factory;
             drawToCommand = new DrawToCommand();
             penCommand = new PenCommand();
+            circleCommand = new CircleCommand();
         }
 
         public void ParseCommand(string command)
@@ -41,6 +43,11 @@ namespace SE4
                 else if (commandType == "moveto")
                 {
                     penCommand.Execute(shapeFactory, parts);
+                }
+
+                else if (commandType == "circle")
+                {
+                    circleCommand.Execute(shapeFactory, parts);
                 }
 
                 else if (commandType == "clear")

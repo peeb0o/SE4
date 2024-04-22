@@ -97,7 +97,7 @@ namespace SE4
             if (singleCommandTextBox.Text.Trim().ToLower().Equals("run"))
             {
                 runCommandEntered = true;
-            }            
+            }
         }
 
         private void saveButtonClicked(object sender, EventArgs e)
@@ -125,12 +125,22 @@ namespace SE4
             load.Title = "Load File";
             load.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 
-            if(load.ShowDialog() == DialogResult.OK)
+            if (load.ShowDialog() == DialogResult.OK)
             {
                 string file = load.FileName;
                 string text = System.IO.File.ReadAllText(file);
                 multiLineTextBox.Text = text;
             }
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void drawPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

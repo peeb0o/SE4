@@ -66,6 +66,8 @@
     <Compile Include="CircleCommand.cs" />
     <Compile Include="Pen.cs" />
     <Compile Include="PenCommand.cs" />
+    <Compile Include="Rectangle.cs" />
+    <Compile Include="RectangleCommand.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="ShapesInterface.cs" />
     <Compile Include="PanelUtilities.cs" />

@@ -16,6 +16,7 @@ namespace SE4
         private Pen pen = new Pen();
         public int penX { get; private set; }
         public int penY { get; private set; }
+        public Color penColor { get; private set; } = Color.Black;
 
         public ShapeFactory(Panel panel)
         {
@@ -77,6 +78,16 @@ namespace SE4
             penX = x;
             penY = y;
             drawPanel.Refresh(); 
+        }
+
+        public void SetPenColour(Color newColor)
+        {
+            penColor = newColor;
+        }
+
+        public Color GetPenColour()
+        {
+            return penColor;
         }
 
         public void RedrawBitmap()

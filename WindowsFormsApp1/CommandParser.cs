@@ -14,6 +14,7 @@ namespace SE4
         private DrawToCommand drawToCommand;
         private PenCommand penCommand;
         private CircleCommand circleCommand;
+        private RectangleCommand rectangleCommand;
 
         public CommandParser(ShapeFactory factory)
         {
@@ -21,6 +22,7 @@ namespace SE4
             drawToCommand = new DrawToCommand();
             penCommand = new PenCommand();
             circleCommand = new CircleCommand();
+            rectangleCommand = new RectangleCommand();
         }
 
         public void ParseCommand(string command)
@@ -45,9 +47,19 @@ namespace SE4
                     penCommand.Execute(shapeFactory, parts);
                 }
 
+                else if (commandType == "pen")
+                {
+                    penCommand.Execute(shapeFactory, parts);
+                }
+
                 else if (commandType == "circle")
                 {
                     circleCommand.Execute(shapeFactory, parts);
+                }
+
+                else if (commandType == "rectangle")
+                {
+                    rectangleCommand.Execute(shapeFactory, parts);
                 }
 
                 else if (commandType == "clear")

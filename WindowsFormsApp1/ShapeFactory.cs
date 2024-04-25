@@ -18,6 +18,8 @@ namespace SE4
         public int penY { get; private set; }
         public Color penColor { get; private set; } = Color.Black;
 
+        public bool fill { get; private set; } = false;
+
         public ShapeFactory(Panel panel)
         {
             drawPanel = panel;
@@ -88,6 +90,16 @@ namespace SE4
         public Color GetPenColour()
         {
             return penColor;
+        }
+
+        public void SetFillValue(Boolean fillSetting)
+        {
+            fill = fillSetting;
+        }
+
+        public Boolean GetFill()
+        {
+            return fill;
         }
 
         public void RedrawBitmap()

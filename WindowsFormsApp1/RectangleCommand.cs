@@ -19,7 +19,7 @@ namespace SE4
 
                 if (coordinates.Length == 2 && int.TryParse(coordinates[0], out int width) && int.TryParse(coordinates[1], out int height))
                 {
-                    Rectangle rect = new Rectangle(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, width, height);
+                    Rectangle rect = new Rectangle(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, width, height, shapeFactory.fill);
                     shapeFactory.AddShape(rect);
                 }
             }

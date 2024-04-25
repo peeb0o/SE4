@@ -15,8 +15,6 @@ namespace SE4
         {
             Graphics g = panel.CreateGraphics();
 
-            g.Clear(panel.BackColor);
-
             g.DrawString(message, SystemFonts.DefaultFont, Brushes.Black, new Point(10, 10));
         }
     }

@@ -7,8 +7,9 @@ using System.Drawing;
 
 namespace SE4
 {
-    class Pen
+    public class Pen
     {
+      
         public void Draw(Graphics graphics, int penX, int penY)
         {
             // Draw the pen at the specified position

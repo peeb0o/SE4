@@ -15,6 +15,8 @@ namespace SE4
         private PenCommand penCommand;
         private CircleCommand circleCommand;
         private RectangleCommand rectangleCommand;
+        private TriangleCommand triangleCommand;
+        private FillCommand fillCommand;
 
         public CommandParser(ShapeFactory factory)
         {
@@ -23,6 +25,8 @@ namespace SE4
             penCommand = new PenCommand();
             circleCommand = new CircleCommand();
             rectangleCommand = new RectangleCommand();
+            triangleCommand = new TriangleCommand();
+            fillCommand = new FillCommand();
         }
 
         public void ParseCommand(string command)
@@ -52,6 +56,11 @@ namespace SE4
                     penCommand.Execute(shapeFactory, parts);
                 }
 
+                else if (commandType == "fill")
+                {
+                    fillCommand.Execute(shapeFactory, parts);
+                }
+
                 else if (commandType == "circle")
                 {
                     circleCommand.Execute(shapeFactory, parts);
@@ -60,6 +69,11 @@ namespace SE4
                 else if (commandType == "rectangle")
                 {
                     rectangleCommand.Execute(shapeFactory, parts);
+                }
+                
+                else if(commandType == "triangle")
+                {
+                    triangleCommand.Execute(shapeFactory, parts);
                 }
 
                 else if (commandType == "clear")

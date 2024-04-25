@@ -10,16 +10,18 @@ namespace SE4
     public class Rectangle : Shape
     {
         private int width, height;
-
-        public Rectangle(Color colour, int x, int y, int width, int height) : base(colour, x, y)
+        private Boolean fill;
+        public Rectangle(Color colour, int x, int y, int width, int height, bool fill) : base(colour, x, y)
         {
             this.x = x;
             this.y = y;
             this.width = width; 
             this.height = height;
+            this.fill = fill;
+
         }
 
-        public override double calcArea()
+        /*public override double calcArea()
         {
             return width * height;
         }
@@ -27,12 +29,20 @@ namespace SE4
         public override double calcPerimeter()
         {
             return 2 * (width + height);
-        }
+        }*/
 
         public override void draw(Graphics g)
         {
-            System.Drawing.Pen p = new System.Drawing.Pen(colour, 2);
-            g.DrawRectangle(p, x, y, width, height);
+            if (fill)
+            {
+                SolidBrush b = new SolidBrush(colour);
+                g.FillRectangle(b, x, y, width, height);
+            }
+            else
+            {
+                System.Drawing.Pen p = new System.Drawing.Pen(colour, 2);
+                g.DrawRectangle(p, x, y, width, height);
+            }
             base.draw(g);
         }
 

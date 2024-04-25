@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SE4
 {
-    class Circle : Shape
+    public class Circle : Shape
     {
         int radius;
 
@@ -18,7 +18,7 @@ namespace SE4
         public Circle(Color colour, int x, int y, int radius) : base(colour, x, y)
         {
 
-            this.radius = radius; //the only thingthat is different from shape
+            this.radius = radius; 
         }
 
         public override void set(Color colour, params int[] list)
@@ -31,12 +31,12 @@ namespace SE4
         public override void draw(Graphics g)
         {
 
-            System.Drawing.Pen p = new System.Drawing.Pen(Color.Black, 2);   
+            System.Drawing.Pen p = new System.Drawing.Pen(colour, 2);   
             g.DrawEllipse(p, x, y, radius * 2, radius * 2);
             base.draw(g);
         }
 
-        public override double calcArea()
+        /*public override double calcArea()
         {
             return Math.PI * (radius ^ 2);
         }
@@ -44,12 +44,11 @@ namespace SE4
         public override double calcPerimeter()
         {
             return 2 * Math.PI * radius;
-        }
+        }*/
 
-        public override string ToString() //all classes inherit from object and ToString() is abstract in object
+        public override string ToString()
         {
-            String text = base.ToString() + "  " + this.radius;
-            return null;
+            return null; //TODO don't return null fix later
         }
     }
 }

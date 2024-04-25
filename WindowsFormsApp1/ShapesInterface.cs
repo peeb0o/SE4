@@ -12,8 +12,8 @@ namespace SE4
 
         void set(Color c, params int[] list);
         void draw(Graphics g);
-        double calcArea();
-        double calcPerimeter();
+        /*double calcArea();
+        double calcPerimeter();*/
 
     }
 }

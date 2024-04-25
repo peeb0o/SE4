@@ -29,8 +29,8 @@ namespace SE4
             this.y = y;
         }
 
-        public abstract double calcArea();
-        public abstract double calcPerimeter();
+        /*public abstract double calcArea();
+        public abstract double calcPerimeter();*/
 
         public virtual void draw(Graphics g)
         {

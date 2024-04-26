@@ -31,7 +31,7 @@ namespace SE4
             // Draw shapes onto the panel when it is painted
             e.Graphics.DrawImage(drawBitmap, Point.Empty);
 
-            pen.Draw(e.Graphics, penX, penY);
+            pen.Draw(penColor, e.Graphics, penX, penY);
         }
 
         public void ExecuteCommand(Command command, string[] parameters)
@@ -84,7 +84,8 @@ namespace SE4
 
         public void SetPenColour(Color newColor)
         {
-            penColor = newColor;
+             penColor = newColor;
+            drawPanel.Refresh();
         }
 
         public Color GetPenColour()

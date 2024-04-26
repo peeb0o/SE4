@@ -10,10 +10,11 @@ namespace SE4
     public class Pen
     {
       
-        public void Draw(Graphics graphics, int penX, int penY)
+        public void Draw(Color c, Graphics graphics, int penX, int penY)
         {
             // Draw the pen at the specified position
-            graphics.FillEllipse(Brushes.Red, penX, penY, 5, 5);
+            SolidBrush b = new SolidBrush(c);
+            graphics.FillEllipse(b, penX, penY, 5, 5);
         }
     }
 }

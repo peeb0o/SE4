@@ -17,7 +17,7 @@ namespace SE4
             {
                if (int.TryParse(parameters[1], out int radius))
                 {
-                    Circle circle = new Circle(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, radius);
+                    Circle circle = new Circle(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, radius, shapeFactory.fill);
                     shapeFactory.AddShape(circle);
                 }
             }

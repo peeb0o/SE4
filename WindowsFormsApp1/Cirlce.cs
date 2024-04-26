@@ -10,15 +10,16 @@ namespace SE4
     public class Circle : Shape
     {
         int radius;
-
+        private Boolean fill;
         public Circle() : base()
         {
 
         }
-        public Circle(Color colour, int x, int y, int radius) : base(colour, x, y)
+        public Circle(Color colour, int x, int y, int radius, bool fill) : base(colour, x, y)
         {
 
-            this.radius = radius; 
+            this.radius = radius;
+            this.fill = fill;
         }
 
         public override void set(Color colour, params int[] list)
@@ -30,9 +31,16 @@ namespace SE4
 
         public override void draw(Graphics g)
         {
-
-            System.Drawing.Pen p = new System.Drawing.Pen(colour, 2);   
+            if (fill)
+            {
+                SolidBrush b = new SolidBrush(colour);
+                g.FillEllipse(b, x, y, radius * 2, radius * 2);
+            }
+            else 
+            {
+            System.Drawing.Pen p = new System.Drawing.Pen(colour, 2);
             g.DrawEllipse(p, x, y, radius * 2, radius * 2);
+            }
             base.draw(g);
         }
 

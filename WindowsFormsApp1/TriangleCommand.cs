@@ -17,7 +17,7 @@ namespace SE4
             {
                 if (int.TryParse(parameters[1], out int length))
                 {
-                    Triangle triangle = new Triangle(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, length);
+                    Triangle triangle = new Triangle(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, length, shapeFactory.fill);
                     shapeFactory.AddShape(triangle);
                 }
             }

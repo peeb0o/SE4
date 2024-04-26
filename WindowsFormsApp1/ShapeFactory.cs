@@ -67,14 +67,6 @@ namespace SE4
             drawPanel.Refresh();
         }
 
-        public void DrawTo(int startX, int startY, int endX, int endY)
-        {
-            using (Graphics graphics = Graphics.FromImage(drawBitmap))
-            {
-                graphics.DrawLine(Pens.Black, startX, startY, endX, endY);
-            }
-        }
-
         public void MovePen(int x, int y)
         {
             penX = x;

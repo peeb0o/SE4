@@ -38,16 +38,16 @@ namespace SE4
             this.Load = new System.Windows.Forms.Button();
             this.multiLineTextBox = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(3, 57);
+            this.runButton.Location = new System.Drawing.Point(3, 64);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(80, 22);
             this.runButton.TabIndex = 0;
@@ -60,9 +60,9 @@ namespace SE4
             this.drawPanel.AutoSize = true;
             this.drawPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.drawPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drawPanel.Location = new System.Drawing.Point(363, 6);
+            this.drawPanel.Location = new System.Drawing.Point(504, 6);
             this.drawPanel.Name = "drawPanel";
-            this.drawPanel.Size = new System.Drawing.Size(821, 640);
+            this.drawPanel.Size = new System.Drawing.Size(1149, 723);
             this.drawPanel.TabIndex = 1;
             this.drawPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.drawPanel_Paint);
             // 
@@ -71,7 +71,7 @@ namespace SE4
             this.singleCommandTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.singleCommandTextBox.Location = new System.Drawing.Point(3, 3);
             this.singleCommandTextBox.Name = "singleCommandTextBox";
-            this.singleCommandTextBox.Size = new System.Drawing.Size(342, 20);
+            this.singleCommandTextBox.Size = new System.Drawing.Size(483, 20);
             this.singleCommandTextBox.TabIndex = 3;
             this.singleCommandTextBox.TextChanged += new System.EventHandler(this.singleCommandTextBoxRunCommand);
             this.singleCommandTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.singleCommandTextBoxEnterPressed);
@@ -101,7 +101,7 @@ namespace SE4
             this.multiLineTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.multiLineTextBox.Location = new System.Drawing.Point(6, 6);
             this.multiLineTextBox.Name = "multiLineTextBox";
-            this.multiLineTextBox.Size = new System.Drawing.Size(348, 640);
+            this.multiLineTextBox.Size = new System.Drawing.Size(489, 723);
             this.multiLineTextBox.TabIndex = 4;
             this.multiLineTextBox.Text = "";
             this.multiLineTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -123,24 +123,8 @@ namespace SE4
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1190, 769);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1659, 867);
             this.tableLayoutPanel1.TabIndex = 7;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.singleCommandTextBox, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.runButton, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 655);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(348, 108);
-            this.tableLayoutPanel2.TabIndex = 5;
             // 
             // tableLayoutPanel3
             // 
@@ -150,28 +134,44 @@ namespace SE4
             this.tableLayoutPanel3.Controls.Add(this.Load, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.Save, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(363, 655);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(504, 738);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(183, 108);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(183, 123);
             this.tableLayoutPanel3.TabIndex = 6;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.singleCommandTextBox, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.runButton, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 738);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(489, 123);
+            this.tableLayoutPanel2.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1190, 769);
+            this.ClientSize = new System.Drawing.Size(1659, 867);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "Form";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

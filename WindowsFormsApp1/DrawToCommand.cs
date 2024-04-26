@@ -21,8 +21,8 @@ namespace SE4
                 if (coordinates.Length == 2 && int.TryParse(coordinates[0], out int x) && int.TryParse(coordinates[1], out int y))
                 {
 
-                    shapeFactory.DrawTo(shapeFactory.penX, shapeFactory.penY, x, y);
-
+                    DrawTo line = new DrawTo(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, x, y);
+                    shapeFactory.AddShape(line);
                     shapeFactory.MovePen(x, y);
 
                 } else

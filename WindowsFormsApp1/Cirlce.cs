@@ -56,7 +56,7 @@ namespace SE4
 
         public override string ToString()
         {
-            return null; //TODO don't return null fix later
+            return ""; //TODO don't return null fix later
         }
     }
 }

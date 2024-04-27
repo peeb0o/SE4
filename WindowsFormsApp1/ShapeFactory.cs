@@ -11,7 +11,7 @@ namespace SE4
     public class ShapeFactory
     {
         public Panel drawPanel;
-        private List<Shape> shapes = new List<Shape>();
+        public List<Shape> shapes = new List<Shape>();
         private Bitmap drawBitmap;
         private Pen pen = new Pen();
         public int penX { get; private set; }
@@ -29,7 +29,7 @@ namespace SE4
         private void DrawPanel_Paint(object sender, PaintEventArgs e)
         {
             // Draw shapes onto the panel when it is painted
-            e.Graphics.DrawImage(drawBitmap, Point.Empty);
+            e.Graphics.DrawImageUnscaled(drawBitmap, Point.Empty);
 
             pen.Draw(penColor, e.Graphics, penX, penY);
         }

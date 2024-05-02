@@ -22,7 +22,7 @@ namespace SE4
             graphics = shapeFactory.drawPanel.CreateGraphics();
             if (parameters.Length == 2)
             {
-               String radiusString = parameters[1].Trim();
+               String radiusString = parameters[1].Trim().ToLower();
                int radius = 0;
 
                 if (variableManager.VariableExists(radiusString))

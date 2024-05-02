@@ -101,7 +101,7 @@ namespace SE4
                     {
                         // Split the command into variable name and value
                         string[] assignment = command.Split('=');
-                        string variableName = assignment[0].Trim();
+                        string variableName = assignment[0].Trim().ToLower();
                         string valueString = assignment[1].Trim();
 
                         // Parse the value string to determine the variable value

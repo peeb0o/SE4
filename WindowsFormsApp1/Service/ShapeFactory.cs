@@ -34,11 +34,6 @@ namespace SE4
             pen.Draw(penColor, e.Graphics, penX, penY);
         }
 
-        public void ExecuteCommand(Command command, string[] parameters)
-        {
-            command.Execute(this, parameters);
-        }
-
         public void AddShape(Shape shape)
         {
             shapes.Add(shape);

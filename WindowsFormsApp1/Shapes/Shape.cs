@@ -12,7 +12,6 @@ namespace SE4
 
         protected Color colour;
         protected int x, y;
-
         public int X { get { return x; } }
         public int Y { get { return y; } }
 

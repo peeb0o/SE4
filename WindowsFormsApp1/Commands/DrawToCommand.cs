@@ -23,48 +23,50 @@ namespace SE4
 
         public override void Execute(ShapeFactory shapeFactory, string[] parameters)
         {
-            if (parameters.Length == 2)
+
+            //Check parameters are exactly 2 
+            if (parameters.Length != 2)
             {
-                string[] coordinates = parameters[1].Split(',');
-
-                int x = 0;
-                int y = 0;
-
-
-                // Check if the first coordinate is a variable or a literal
-                if (variableManager.VariableExists(coordinates[0].Trim()))
-                {
-                    x = variableManager.GetVariableValue(coordinates[0].Trim());
-                }
-                else if (!int.TryParse(coordinates[0].Trim(), out x))
-                {
-                    // Handle invalid coordinate input
-                    PanelUtilities.WriteToPanel(shapeFactory.drawPanel, "Invalid X coordinate");
-                    return;
-                }
-
-                // Check if the second coordinate is a variable or a literal
-                if (variableManager.VariableExists(coordinates[1].Trim()))
-                {
-                    y = variableManager.GetVariableValue(coordinates[1].Trim());
-                }
-                else if (!int.TryParse(coordinates[1].Trim(), out y))
-                {
-                    // Handle invalid coordinate input
-                    PanelUtilities.WriteToPanel(shapeFactory.drawPanel, "Invalid Y coordinate");
-                    return;
-                }
-
-                //Draw line
-                DrawTo line = new DrawTo(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, x, y);
-                shapeFactory.AddShape(line);
-                shapeFactory.MovePen(x, y);
-            }
-            else
-            {
-                PanelUtilities.WriteToPanel(shapeFactory.drawPanel, "Invalid number of parameters");
                 throw new InvalidParameterCountException("Invalid number of parameters");
             }
+
+            
+            //Split coordinates on the comma
+            string[] coordinates = parameters[1].Split(',');
+
+            //Check 2 coordinates passed
+            if (coordinates.Length != 2)
+            {
+                throw new InvalidParameterCountException("Invalid number of coordinates passed");
+            }
+
+            //Check if coordinate is a variable or literal
+            int x = GetCoordinateValue(coordinates[0]);
+            int y = GetCoordinateValue(coordinates[1]);
+
+            //Draw line
+            DrawTo line = new DrawTo(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, x, y);
+            shapeFactory.AddShape(line);
+            shapeFactory.MovePen(x, y);
+            
+        }
+
+        private int GetCoordinateValue(string coordinate)
+        {
+            //Check if variable
+            if (variableManager.VariableExists(coordinate))
+            {
+                return variableManager.GetVariableValue(coordinate);
+            }
+
+            //Otherwise tryparse int
+            if (int.TryParse(coordinate, out int value))
+            {
+                return value;
+            }
+
+            //Throw exception in case invalid coordinate passed
+            throw new CommandException($"Invalid dimension value: {coordinate}");
         }
     }
 }

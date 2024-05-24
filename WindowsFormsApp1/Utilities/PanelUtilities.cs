@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace SE4
 {
-    class PanelUtilities
+    public static class PanelUtilities
     {
 
         public static void WriteToPanel(Panel panel, string message)

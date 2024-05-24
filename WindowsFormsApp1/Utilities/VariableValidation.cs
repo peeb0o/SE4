@@ -11,9 +11,9 @@ namespace SE4.Utilities
     {
         public static bool IsValidVariableName(string variableName)
         {
-            // Define a regex pattern for valid variable names
+            // Define a regex pattern for valid variable names 
+            // Validates that the name contains only upper or lower case alphabetical characters and underscores
             string pattern = @"^[a-zA-Z_]\w*$";
-
             // Create a regex object with the pattern
             Regex regex = new Regex(pattern);
 

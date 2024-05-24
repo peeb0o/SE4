@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE4.Variables;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace SE4
     public class RectangleCommand : Command
     {
         private Graphics graphics;
+        private VariableManager variableManager;
+
+        public RectangleCommand(VariableManager variableManager)
+        {
+            this.variableManager = variableManager;
+        }
+
         public override void Execute(ShapeFactory shapeFactory, string[] parameters)
         {
             graphics = shapeFactory.drawPanel.CreateGraphics();

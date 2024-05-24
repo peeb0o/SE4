@@ -68,6 +68,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\InvalidParameterCountException.cs" />
+    <Compile Include="Exceptions\CommandException.cs" />
+    <Compile Include="Service\ArithmeticOperatorHandler.cs" />
     <Compile Include="Service\StoredProgram.cs" />
     <Compile Include="Shapes\Cirlce.cs" />
     <Compile Include="Commands\CircleCommand.cs" />
@@ -79,7 +82,7 @@
     <Compile Include="Commands\RectangleCommand.cs" />
     <Compile Include="Shapes\Shape.cs" />
     <Compile Include="Shapes\ShapesInterface.cs" />
-    <Compile Include="Service\PanelUtilities.cs" />
+    <Compile Include="Utilities\PanelUtilities.cs" />
     <Compile Include="Service\CommandParser.cs" />
     <Compile Include="Commands\DrawToCommand.cs" />
     <Compile Include="Commands\Command.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\Triangle.cs" />
     <Compile Include="Commands\TriangleCommand.cs" />
+    <Compile Include="Utilities\VariableValidation.cs" />
     <Compile Include="Variables\Variable.cs" />
     <Compile Include="Variables\VariableManager.cs" />
     <EmbeddedResource Include="Form1.resx">

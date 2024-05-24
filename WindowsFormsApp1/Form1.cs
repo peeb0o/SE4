@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SE4.Exceptions;
+using SE4.Variables;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,7 @@ namespace SE4
         private ShapeFactory shapeManager;
         private CommandParser commandParser;
         private bool runCommandEntered = false;
+        private VariableManager variableManager;
 
         public Form1()
         {
@@ -22,7 +25,8 @@ namespace SE4
 
             // Initialize the shape manager with the drawing panel
             shapeManager = new ShapeFactory(drawPanel);
-            commandParser = new CommandParser(shapeManager);
+            variableManager = new VariableManager();
+            commandParser = new CommandParser(shapeManager, variableManager);
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -39,8 +43,19 @@ namespace SE4
 
                 if (!string.IsNullOrWhiteSpace(command))
                 {
-                    commandParser.ParseCommand(command);
-                    Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                    try
+                    {
+                        commandParser.ParseCommand(command);
+                        Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                    }
+                    catch (InvalidParameterCountException ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                    }
+                    catch(CommandException ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                    }
                 }
 
             }
@@ -53,8 +68,19 @@ namespace SE4
                 {
                     if (!string.IsNullOrWhiteSpace(command))
                     {
-                        commandParser.ParseCommand(command);
-                        Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                        try
+                        {
+                            commandParser.ParseCommand(command);
+                            Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                        }
+                        catch (InvalidParameterCountException ex)
+                        {
+                            Console.WriteLine($"Error: {ex.Message}");
+                        }
+                        catch (CommandException ex)
+                        {
+                            Console.WriteLine($"Error: {ex.Message}");
+                        }
                     }
                 }
             }
@@ -69,8 +95,19 @@ namespace SE4
                 string command = singleCommandTextBox.Text.Trim();
                 if (!string.IsNullOrEmpty(command))
                 {
-                    commandParser.ParseCommand(command);
-                    Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                    try
+                    {
+                        commandParser.ParseCommand(command);
+                        Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                    }
+                    catch (InvalidParameterCountException ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                    }
+                    catch (CommandException ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                    }
                 }
                 singleCommandTextBox.Clear();
 
@@ -82,8 +119,19 @@ namespace SE4
                     {
                         if (!string.IsNullOrWhiteSpace(cmd))
                         {
-                            commandParser.ParseCommand(cmd);
-                            Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                            try
+                            {
+                                commandParser.ParseCommand(cmd);
+                                Console.WriteLine("Parser called"); // for debugging purposes - remove later
+                            }
+                            catch (InvalidParameterCountException ex)
+                            {
+                                Console.WriteLine($"Error: {ex.Message}");
+                            }
+                            catch (CommandException ex)
+                            {
+                                Console.WriteLine($"Error: {ex.Message}");
+                            }
                         }
                     }
                     singleCommandTextBox.Clear();

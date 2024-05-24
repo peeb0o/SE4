@@ -22,9 +22,10 @@ namespace SE4
             graphics = shapeFactory.drawPanel.CreateGraphics();
             if (parameters.Length == 2)
             {
-               String radiusString = parameters[1].Trim().ToLower();
-               int radius = 0;
+                String radiusString = parameters[1].Trim().ToLower();
+                int radius = 0;
 
+                //Check if radius is a variable or literal
                 if (variableManager.VariableExists(radiusString))
                 {
                     radius = variableManager.GetVariableValue(radiusString);
@@ -34,6 +35,7 @@ namespace SE4
                     radius = int.Parse(radiusString);
                 }
 
+               //Draw circle
                Circle circle = new Circle(shapeFactory.penColor, shapeFactory.penX- radius, shapeFactory.penY - radius, radius, shapeFactory.fill);
                shapeFactory.AddShape(circle);
                 

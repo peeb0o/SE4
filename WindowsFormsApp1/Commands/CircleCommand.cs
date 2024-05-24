@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using SE4.Variables;
+using SE4.Exceptions;
 
 namespace SE4
 {
@@ -20,26 +21,40 @@ namespace SE4
         public override void Execute(ShapeFactory shapeFactory, string[] parameters)
         {
             graphics = shapeFactory.drawPanel.CreateGraphics();
-            if (parameters.Length == 2)
+
+            //Check parameters are exactly 2 
+            if (parameters.Length != 2)
             {
-                String radiusString = parameters[1].Trim().ToLower();
-                int radius = 0;
-
-                //Check if radius is a variable or literal
-                if (variableManager.VariableExists(radiusString))
-                {
-                    radius = variableManager.GetVariableValue(radiusString);
-                }
-                else
-                {
-                    radius = int.Parse(radiusString);
-                }
-
-               //Draw circle
-               Circle circle = new Circle(shapeFactory.penColor, shapeFactory.penX- radius, shapeFactory.penY - radius, radius, shapeFactory.fill);
-               shapeFactory.AddShape(circle);
-                
+                throw new InvalidParameterCountException("Invalid number of parameters");
             }
+
+            //Split on space, radius will always be second element
+            String[] radiusString = parameters[1].Split(' ');
+
+            //Check if radius is a variable or literal
+            int radius = GetRadiusValue(parameters[1]);
+
+            //Draw circle
+            Circle circle = new Circle(shapeFactory.penColor, shapeFactory.penX - radius, shapeFactory.penY - radius, radius, shapeFactory.fill);
+            shapeFactory.AddShape(circle);
+        }
+
+        private int GetRadiusValue(string radius)
+        {
+            //Check if variable
+            if (variableManager.VariableExists(radius))
+            {
+                return variableManager.GetVariableValue(radius);
+            }
+
+            //Otherwise tryparse int
+            if (int.TryParse(radius, out int value))
+            {
+                return value;
+            }
+
+            //Throw exception in case invalid radius passed
+            throw new CommandException($"Invalid radius value: {radius}");
         }
     }
 }

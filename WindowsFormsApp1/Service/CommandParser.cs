@@ -33,7 +33,7 @@ namespace SE4
             penCommand = new PenCommand();
             circleCommand = new CircleCommand(variableManager);
             rectangleCommand = new RectangleCommand(variableManager);
-            triangleCommand = new TriangleCommand();
+            triangleCommand = new TriangleCommand(variableManager);
             fillCommand = new FillCommand();
             storedProgram = new StoredProgram(variableManager);
             operatorHandler = new ArithmeticOperatorHandler(variableManager, shapeFactory);

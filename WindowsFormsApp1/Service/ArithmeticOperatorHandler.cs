@@ -23,7 +23,7 @@ namespace SE4.Service
         {
             try
             {
-                string[] assignmentParts = command.Split('=');
+                string[] assignmentParts = command.ToLower().Split('=');
                
                 if (assignmentParts.Length != 2)
                 {

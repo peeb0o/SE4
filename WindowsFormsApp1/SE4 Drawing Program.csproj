@@ -71,6 +71,8 @@
     <Compile Include="Exceptions\InvalidParameterCountException.cs" />
     <Compile Include="Exceptions\CommandException.cs" />
     <Compile Include="Service\ArithmeticOperatorHandler.cs" />
+    <Compile Include="Service\ComparisonOperatorHandler.cs" />
+    <Compile Include="Service\EqualsOperatorHandler.cs" />
     <Compile Include="Service\StoredProgram.cs" />
     <Compile Include="Shapes\Cirlce.cs" />
     <Compile Include="Commands\CircleCommand.cs" />

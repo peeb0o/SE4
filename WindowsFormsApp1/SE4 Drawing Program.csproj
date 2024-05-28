@@ -68,12 +68,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\FlashCommandStop.cs" />
+    <Compile Include="Commands\FlashingCommand.cs" />
     <Compile Include="Exceptions\InvalidParameterCountException.cs" />
     <Compile Include="Exceptions\CommandException.cs" />
     <Compile Include="Service\ArithmeticOperatorHandler.cs" />
     <Compile Include="Service\ComparisonOperatorHandler.cs" />
     <Compile Include="Service\EqualsOperatorHandler.cs" />
-    <Compile Include="Service\StoredProgram.cs" />
+    <Compile Include="Service\VariableCommand.cs" />
     <Compile Include="Shapes\Cirlce.cs" />
     <Compile Include="Commands\CircleCommand.cs" />
     <Compile Include="Shapes\DrawTo.cs" />

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace SE4.Service
 {
-    public class StoredProgram : Command
+    public class VariableCommand : Command
     {
         private VariableManager variableManager;
         
-        public StoredProgram(VariableManager variableManager)
+        public VariableCommand(VariableManager variableManager)
         {
             this.variableManager = variableManager;
         }
@@ -72,12 +72,17 @@ namespace SE4.Service
                     //Tryparse variable value throw error if unable
                     if(!int.TryParse(parameters[3].Trim(), out variableValue))
                     {
-                        throw new CommandException("Invalid variable value passed");
+                        throw new CommandException($"Invalid variable value passed + '{variableValue}'");
                     }
 
                     if (variableManager.VariableExists(variableName))
                     {
-                        throw new CommandException("Variable with this name already exists");
+                        throw new CommandException($"Variable: '{variableName}' already exists");
+                    }
+
+                    if (!VariableValidation.IsValidVariableName(variableName))
+                    {
+                        throw new CommandException($"Invalid Variable Name: '{variableName}'");
                     }
 
                     ProcessCommands(variableName, variableValue);

@@ -22,7 +22,7 @@ namespace SE4
         private RectangleCommand rectangleCommand;
         private TriangleCommand triangleCommand;
         private FillCommand fillCommand;
-        private StoredProgram storedProgram;
+        private VariableCommand variableCommand;
         private VariableManager variableManager;
         private ArithmeticOperatorHandler operatorHandler;
         private ComparisonOperatorHandler comparisonHandler;
@@ -48,7 +48,7 @@ namespace SE4
             rectangleCommand = new RectangleCommand(variableManager);
             triangleCommand = new TriangleCommand(variableManager);
             fillCommand = new FillCommand();
-            storedProgram = new StoredProgram(variableManager);
+            variableCommand = new VariableCommand(variableManager);
             operatorHandler = new ArithmeticOperatorHandler(variableManager, shapeFactory);
             comparisonHandler = new ComparisonOperatorHandler(variableManager);
             equalsHandler = new EqualsOperatorHandler(variableManager);
@@ -147,7 +147,7 @@ namespace SE4
                         ifCommands.Clear();
                         break;
                     case "var":
-                        storedProgram.Execute(shapeFactory, parts);
+                        variableCommand.Execute(shapeFactory, parts);
                         break;
                     case "drawto":
                         drawToCommand.Execute(shapeFactory, parts);

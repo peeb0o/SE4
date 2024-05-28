@@ -19,14 +19,16 @@ namespace SE4.Tests
         private ShapeFactory shapeFactory;
         private Panel panel;
         private VariableManager variableManager;
+        private int lineNumber = 0; // add logic later
 
         [TestInitialize]
         public void Setup()
         {
             panel = new Panel();
-            variableManager = new VariableManager();
+            variableManager = VariableManager.Instance;
             shapeFactory = new ShapeFactory(panel);
-            commandParser = new CommandParser(shapeFactory, variableManager);
+            commandParser = new CommandParser(shapeFactory, variableManager, lineNumber);
+            variableManager.VariablesClear();
         }
 
         [TestMethod()]
@@ -36,7 +38,7 @@ namespace SE4.Tests
             string command = "drawto 100,100";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.AreEqual(100, shapeFactory.penX);
@@ -50,7 +52,7 @@ namespace SE4.Tests
             string command = "moveto 100,100";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.AreEqual(100, shapeFactory.penX);
@@ -64,7 +66,7 @@ namespace SE4.Tests
             string command = "pen red";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.AreEqual(shapeFactory.penColor, Color.Red);
@@ -77,7 +79,7 @@ namespace SE4.Tests
             string command = "fill on";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.AreEqual(shapeFactory.fill, true);
@@ -90,7 +92,7 @@ namespace SE4.Tests
             string command = "fill off";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.AreEqual(shapeFactory.fill, false);
@@ -103,7 +105,7 @@ namespace SE4.Tests
             string command = "circle 20";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.IsTrue(shapeFactory.shapes.Last() is Circle);
@@ -116,7 +118,7 @@ namespace SE4.Tests
             string command = "rectangle 200,100";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.IsTrue(shapeFactory.shapes.Last() is Rectangle);
@@ -129,7 +131,7 @@ namespace SE4.Tests
             string command = "triangle 20";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.IsTrue(shapeFactory.shapes.Last() is Triangle);
@@ -142,7 +144,7 @@ namespace SE4.Tests
             string command = "reset";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.AreEqual(0, shapeFactory.penX);
@@ -159,7 +161,7 @@ namespace SE4.Tests
             string command = "clear";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
            Assert.AreEqual(0, shapeFactory.shapes.Count);
@@ -173,7 +175,7 @@ namespace SE4.Tests
             string variableName = "x";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.IsTrue(variableManager.VariableExists(variableName));
@@ -187,7 +189,7 @@ namespace SE4.Tests
             string variableName = "x";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.IsTrue(variableManager.VariableExists(variableName));
@@ -201,7 +203,7 @@ namespace SE4.Tests
             string variableName = "x";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.AreEqual(300, variableManager.GetVariableValue(variableName));
@@ -215,7 +217,7 @@ namespace SE4.Tests
             string variableName = "x";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.AreEqual(100, variableManager.GetVariableValue(variableName));
@@ -232,7 +234,7 @@ namespace SE4.Tests
             string variableName = "x";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.AreEqual(60, variableManager.GetVariableValue(variableName));
@@ -248,7 +250,7 @@ namespace SE4.Tests
             string variableName = "x";
 
             //Action
-            commandParser.ParseCommand(command);
+            commandParser.ParseCommand(command, lineNumber);
 
             //Assert
             Assert.AreEqual(40, variableManager.GetVariableValue(variableName));
@@ -262,14 +264,14 @@ namespace SE4.Tests
             try
             {
                 //Action
-                commandParser.ParseCommand(command);
+                commandParser.ParseCommand(command, lineNumber);
 
                 //Assert
                 Assert.Fail("No exception thrown for empty command");
             }
             catch (InvalidParameterCountException ex)
             {
-                Assert.AreEqual("Invalid number of parameters in command", ex.Message);
+                Assert.AreEqual("Invalid command entered", ex.Message);
             }
         }
 
@@ -281,7 +283,7 @@ namespace SE4.Tests
             try
             {
                 //Action
-                commandParser.ParseCommand(command);
+                commandParser.ParseCommand(command, lineNumber);
 
                 //Assert
                 Assert.Fail("No exception thrown for empty command");

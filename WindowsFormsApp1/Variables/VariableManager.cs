@@ -9,10 +9,27 @@ namespace SE4.Variables
     public class VariableManager
     {
         private List<Variable> variables;
+        private static VariableManager instance;
+        private static readonly object padlock = new object();
 
-        public VariableManager()
+        private VariableManager()
         {
             variables = new List<Variable>();
+        }
+
+        public static VariableManager Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new VariableManager();
+                    }
+                    return instance;
+                }
+            }
         }
 
         public void AddVariable(string name, int value)
@@ -54,6 +71,11 @@ namespace SE4.Variables
         public bool VariableExists(string name)
         {
             return variables.Any(v => v.Name == name);
+        }
+
+        public void VariablesClear()
+        {
+            variables.Clear();
         }
     }
 }

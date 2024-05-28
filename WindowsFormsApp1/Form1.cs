@@ -18,6 +18,7 @@ namespace SE4
         private CommandParser commandParser;
         private bool runCommandEntered = false;
         private VariableManager variableManager;
+        private int lineNumber = 1;
 
         public Form1()
         {
@@ -25,8 +26,8 @@ namespace SE4
 
             // Initialize the shape manager with the drawing panel
             shapeManager = new ShapeFactory(drawPanel);
-            variableManager = new VariableManager();
-            commandParser = new CommandParser(shapeManager, variableManager);
+            variableManager = VariableManager.Instance;
+            commandParser = new CommandParser(shapeManager, variableManager, lineNumber);
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -45,15 +46,18 @@ namespace SE4
                 {
                     try
                     {
-                        commandParser.ParseCommand(command);
+                        commandParser.ParseCommand(command, lineNumber);
+                        lineNumber++;
                         Console.WriteLine("Parser called"); // for debugging purposes - remove later
                     }
                     catch (InvalidParameterCountException ex)
                     {
+                        lineNumber++;
                         Console.WriteLine($"Error: {ex.Message}");
                     }
                     catch(CommandException ex)
                     {
+                        lineNumber++;
                         Console.WriteLine($"Error: {ex.Message}");
                     }
                 }
@@ -70,20 +74,24 @@ namespace SE4
                     {
                         try
                         {
-                            commandParser.ParseCommand(command);
+                            commandParser.ParseCommand(command, lineNumber);
+                            lineNumber++;
                             Console.WriteLine("Parser called"); // for debugging purposes - remove later
                         }
                         catch (InvalidParameterCountException ex)
                         {
+                            lineNumber++;
                             Console.WriteLine($"Error: {ex.Message}");
                         }
                         catch (CommandException ex)
                         {
+                            lineNumber++;
                             Console.WriteLine($"Error: {ex.Message}");
                         }
                     }
                 }
             }
+            lineNumber = 1;
         }
 
         private void singleCommandTextBoxEnterPressed(object sender, KeyEventArgs e)
@@ -97,15 +105,18 @@ namespace SE4
                 {
                     try
                     {
-                        commandParser.ParseCommand(command);
+                        commandParser.ParseCommand(command, lineNumber);
+                        lineNumber++;
                         Console.WriteLine("Parser called"); // for debugging purposes - remove later
                     }
                     catch (InvalidParameterCountException ex)
                     {
+                        lineNumber++;
                         Console.WriteLine($"Error: {ex.Message}");
                     }
                     catch (CommandException ex)
                     {
+                        lineNumber++;
                         Console.WriteLine($"Error: {ex.Message}");
                     }
                 }
@@ -121,15 +132,18 @@ namespace SE4
                         {
                             try
                             {
-                                commandParser.ParseCommand(cmd);
+                                commandParser.ParseCommand(cmd, lineNumber);
+                                lineNumber++;
                                 Console.WriteLine("Parser called"); // for debugging purposes - remove later
                             }
                             catch (InvalidParameterCountException ex)
                             {
+                                lineNumber++;
                                 Console.WriteLine($"Error: {ex.Message}");
                             }
                             catch (CommandException ex)
                             {
+                                lineNumber++;
                                 Console.WriteLine($"Error: {ex.Message}");
                             }
                         }
@@ -137,6 +151,7 @@ namespace SE4
                     singleCommandTextBox.Clear();
                 }
             }
+            lineNumber = 1;
         }
 
         private void singleCommandTextBoxRunCommand(object sender, EventArgs e)

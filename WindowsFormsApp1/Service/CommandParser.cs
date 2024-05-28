@@ -1,4 +1,5 @@
-﻿using SE4.Exceptions;
+﻿using SE4.Commands;
+using SE4.Exceptions;
 using SE4.Service;
 using SE4.Utilities;
 using SE4.Variables;
@@ -26,16 +27,20 @@ namespace SE4
         private ArithmeticOperatorHandler operatorHandler;
         private ComparisonOperatorHandler comparisonHandler;
         private EqualsOperatorHandler equalsHandler;
+        private FlashingCommand flashCommand;
+        private FlashCommandStop flashStop;
         private List<string> loopCommands;
         private string loopCondition;
         private bool isInLoop = false;
         private List<string> ifCommands;
         private bool isInIf = false;
         private string ifCondition;
+        private int lineNumber;
 
-        public CommandParser(ShapeFactory factory, VariableManager variableManager)
+        public CommandParser(ShapeFactory factory, VariableManager variableManager, int lineNumber)
         {
-            this.shapeFactory = factory;
+            this.lineNumber = lineNumber;
+            shapeFactory = factory;
             this.variableManager = variableManager;
             drawToCommand = new DrawToCommand(variableManager);
             penCommand = new PenCommand();
@@ -47,11 +52,13 @@ namespace SE4
             operatorHandler = new ArithmeticOperatorHandler(variableManager, shapeFactory);
             comparisonHandler = new ComparisonOperatorHandler(variableManager);
             equalsHandler = new EqualsOperatorHandler(variableManager);
-            this.loopCommands = new List<string>();
-            this.ifCommands = new List<string>();
+            flashCommand = new FlashingCommand();
+            flashStop = new FlashCommandStop();
+            loopCommands = new List<string>();
+            ifCommands = new List<string>();
         }
 
-        public void ParseCommand(string command)
+        public void ParseCommand(string command, int lineNumber)
         {
             //split command
             string[] parts = command.Split(' ');
@@ -65,7 +72,7 @@ namespace SE4
                 if (command.Trim().ToLower() == "endloop")
                 {
                     // Execute the loop
-                    ExecuteLoop();
+                    ExecuteLoop(lineNumber);
                     isInLoop = false;
                     return;
                 }
@@ -77,28 +84,26 @@ namespace SE4
                 
             }
 
-            if (isInIf)
+            if (isInIf && command.Trim().ToLower() != "endif")
             {
-                if(command.Trim().ToLower() == "endif")
-                {
-                    //execute if block
-                    /*ExecuteIf();*/
-                    isInIf = false;
+                isInIf = false;
+                this.ParseCommand(command, lineNumber);
 
-                    if (EvaluateCondition(ifCondition))
-                    {
-                        foreach (var cmd in ifCommands)
-                        {
-                            this.ParseCommand(cmd);
-                        }
-                    }
-                }
-                else
-                {
-                    //Collect if block commands
-                    ifCommands.Add(command);
-                }
                 return;
+            }
+            else if(isInIf && command.Trim().ToLower() == "endif")
+            {
+                isInIf = false;
+
+                if (EvaluateCondition(ifCondition))
+                {
+                    foreach (var cmd in ifCommands)
+                    {
+                        this.ParseCommand(cmd, lineNumber);
+                    }
+
+                    return;
+                }
             }
 
             //parse commands using if statements
@@ -107,7 +112,7 @@ namespace SE4
             try
             {
 
-                if (command.ToLower().Contains('+') || command.ToLower().Contains('-')) //&& command.Contains("=")
+                if (command.ToLower().Contains('+') || command.ToLower().Contains('-'))
                 {
                     try
                     {
@@ -122,24 +127,15 @@ namespace SE4
                     }
                 }
 
-                if (command.ToLower().Contains("==") || command.ToLower().Contains("!=")) 
-                {
-                    try
-                    {
-                        if (equalsHandler.TryHandleEqualsOperator(command))
-                        {
-                            return;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
-                }
-
                 //Check command type, default allows for variables to be declared without var keyword
                 switch (commandType)
                 {
+                    case "flash":
+                        flashCommand.Execute(shapeFactory, parts);
+                        break;
+                    case "stopflash":
+                        flashStop.Execute(shapeFactory, parts);
+                        break;
                     case "loop":
                         loopCondition = command.Substring(command.IndexOf(' ') + 1).Trim();
                         isInLoop = true;
@@ -185,7 +181,8 @@ namespace SE4
             }
             catch (Exception ex)
             {
-                PanelUtilities.WriteToPanel(shapeFactory.drawPanel, ex.Message);
+                PanelUtilities.AddErrorMessage(ex.Message, lineNumber);
+                PanelUtilities.WriteToPanel(shapeFactory.drawPanel);
                 throw;
             }
         }
@@ -202,7 +199,8 @@ namespace SE4
                 //Validating variable name using utility class regex pattern
                 if (!VariableValidation.IsValidVariableName(variableName))
                 {
-                    PanelUtilities.WriteToPanel(shapeFactory.drawPanel, "Invalid variable name given: " + variableName);
+                    PanelUtilities.AddErrorMessage("Invalid variable name given: " + variableName, lineNumber);
+                    PanelUtilities.WriteToPanel(shapeFactory.drawPanel);
                     return;
                     //break leave to test;
                 }
@@ -216,17 +214,19 @@ namespace SE4
                 else
                 {
                     // Invalid value string, write to panel
-                    PanelUtilities.WriteToPanel(shapeFactory.drawPanel, "Invalid variable value: " + valueString);
+                    PanelUtilities.AddErrorMessage("Invalid variable value: " + valueString, lineNumber);
+                    PanelUtilities.WriteToPanel(shapeFactory.drawPanel);
                 }
             }
             else
             {
                 // Invalid command, write to panel
-                throw new InvalidParameterCountException("Invalid number of parameters in command");
+                if (!command.Trim().ToLower().Equals("endif"))
+                throw new InvalidParameterCountException("Invalid command entered");
             }
         }
 
-        private void ExecuteLoop()
+        private void ExecuteLoop(int lineNumber)
         {
             List<string> loopCommandsCopy = new List<string>(loopCommands); // Create a copy of loopCommands (needed or invalid operation exception for iterating over original)
 
@@ -235,7 +235,7 @@ namespace SE4
                 foreach (var cmd in loopCommandsCopy)
                 {
                     Console.WriteLine($"Executing command: {cmd}"); // Debugging statement
-                    ParseCommand(cmd);
+                    ParseCommand(cmd, lineNumber);
                 }
                 // Re-evaluate the loop condition after executing commands
                 if (!EvaluateCondition(loopCondition))

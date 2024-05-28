@@ -95,15 +95,15 @@ namespace SE4.Service
             }
             catch (CommandException ex)
             {
-                PanelUtilities.WriteToPanel(shapeFactory.drawPanel, ex.Message);
+                
                 //throw to outer try catch to break from parsing should exception be thrown in arithmetic logic
-                throw;
+                throw ex;
             }
             catch(InvalidOperationException ex)
             {
-                PanelUtilities.WriteToPanel(shapeFactory.drawPanel, ex.Message);
+                
                 //throw to outer try catch to break from parsing should exception be thrown in arithmetic logic
-                throw;
+                throw ex;
             }
         }
 

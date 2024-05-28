@@ -27,18 +27,12 @@ namespace SE4.Service
             }
             catch (InvalidParameterCountException ex)
             {
-                PanelUtilities.WriteToPanel(shapeFactory.drawPanel, ex.Message);
+                throw ex;
             }
             catch(CommandException ex)
             {
-                PanelUtilities.WriteToPanel(shapeFactory.drawPanel, ex.Message);
+                throw ex;
             }
-            catch (Exception ex)
-            {
-                PanelUtilities.WriteToPanel(shapeFactory.drawPanel, "Unexpected exception has occurred.");
-                Console.WriteLine(ex);
-            }
-            
         }
 
         private void ProcessVarCommand(ShapeFactory shapefactory, string[] parameters)

@@ -27,7 +27,7 @@ namespace SE4
             //Check parameters are exactly 2 
             if (parameters.Length != 2)
             {
-                throw new InvalidParameterCountException("Invalid number of parameters");
+                throw new InvalidParameterCountException("Invalid number of parameters. Syntax: drawto <x,y>");
             }
 
             
@@ -40,12 +40,17 @@ namespace SE4
                 throw new InvalidParameterCountException("Invalid number of coordinates passed");
             }
 
+            if(coordinates[1].Equals("") || coordinates[0].Equals(""))
+            {
+                throw new InvalidParameterCountException("Coordinate cannot be an empty string");
+            }
+
             //Check if coordinate is a variable or literal
             int x = GetCoordinateValue(coordinates[0]);
             int y = GetCoordinateValue(coordinates[1]);
 
             //Draw line
-            DrawTo line = new DrawTo(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, x, y);
+            Line line = new Line(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, x, y);
 
             //Only draw and move pen if not in syntax check
             if (!syntaxCheck)

@@ -7,10 +7,10 @@ using System.Drawing;
 
 namespace SE4
 {
-    public class DrawTo : Shape
+    public class Line : Shape
     {
         private int startX, startY, endX, endY;
-        public DrawTo(Color colour, int startX, int startY, int endX, int endY) : base(colour, endX, endY)
+        public Line(Color colour, int startX, int startY, int endX, int endY) : base(colour, endX, endY)
         {
             this.startX = startX;
             this.startY = startY;

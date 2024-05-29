@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="CircleCommandTest.cs" />
     <Compile Include="CommandParserTests.cs" />
+    <Compile Include="DrawToCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

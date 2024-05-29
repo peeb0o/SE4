@@ -80,7 +80,7 @@
     <Compile Include="Commands\VariableCommand.cs" />
     <Compile Include="Shapes\Cirlce.cs" />
     <Compile Include="Commands\CircleCommand.cs" />
-    <Compile Include="Shapes\DrawTo.cs" />
+    <Compile Include="Shapes\Line.cs" />
     <Compile Include="Commands\FillCommand.cs" />
     <Compile Include="Shapes\Pen.cs" />
     <Compile Include="Commands\PenCommand.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,8 +18,11 @@ namespace SE4
         public int penX { get; private set; }
         public int penY { get; private set; }
         public Color penColor { get; private set; } = Color.Black;
-
         public bool fill { get; private set; } = false;
+        private Thread flashingThread;
+        private bool flashing;
+        private Color[] flashingColours;
+        private int flashingInterval = 500; //half a second per flash
 
         public ShapeFactory(Panel panel)
         {
@@ -41,6 +45,35 @@ namespace SE4
             drawPanel.Refresh();
         }
 
+        public void StartFlash(Color[] colours)
+        {
+            flashingColours = colours;
+            flashing = true;
+            flashingThread = new Thread(new ThreadStart(FlashColours));
+            flashingThread.Start();
+        }
+
+        public void StopFlash()
+        {
+            flashing = false;
+            if (flashingThread.IsAlive)
+            {
+                flashingThread.Join();
+                this.Clear();
+            }
+        }
+
+        private void FlashColours()
+        {
+            int index = 0;
+            while (flashing)
+            {
+                drawPanel.Invoke(new Action(() => drawPanel.BackColor = flashingColours[index]));
+
+                index = (index + 1) % flashingColours.Length;
+                Thread.Sleep(flashingInterval);
+            }
+        }
         public void Clear()
         {
             shapes.Clear();
@@ -50,6 +83,7 @@ namespace SE4
                 graphics.Clear(SystemColors.ButtonShadow);
             }
 
+            PanelUtilities.ClearErrorMessages();
             drawPanel.Refresh();
         }
 

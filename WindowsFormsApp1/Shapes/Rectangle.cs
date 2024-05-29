@@ -11,6 +11,7 @@ namespace SE4
     {
         private int width, height;
         private Boolean fill;
+
         public Rectangle(Color colour, int x, int y, int width, int height, bool fill) : base(colour, x, y)
         {
             this.x = x;
@@ -18,18 +19,7 @@ namespace SE4
             this.width = width; 
             this.height = height;
             this.fill = fill;
-
         }
-
-        /*public override double calcArea()
-        {
-            return width * height;
-        }
-
-        public override double calcPerimeter()
-        {
-            return 2 * (width + height);
-        }*/
 
         public override void draw(Graphics g)
         {
@@ -44,11 +34,6 @@ namespace SE4
                 g.DrawRectangle(p, x, y, width, height);
             }
             base.draw(g);
-        }
-
-        public override string ToString()
-        {
-            return ""; //TODO don't return null fix later
         }
     }
 }

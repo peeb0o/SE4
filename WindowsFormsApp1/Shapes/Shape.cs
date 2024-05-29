@@ -15,21 +15,12 @@ namespace SE4
         public int X { get { return x; } }
         public int Y { get { return y; } }
 
-        public Shape()
-        {
-            colour = Color.Red;
-            x = y = 100;
-        }
-
         public Shape(Color colour, int x, int y)
         {
             this.colour = colour;
             this.x = x;
             this.y = y;
         }
-
-        /*public abstract double calcArea();
-        public abstract double calcPerimeter();*/
 
         public virtual void draw(Graphics g)
         {
@@ -39,21 +30,6 @@ namespace SE4
             drawFormat.FormatFlags = StringFormatFlags.NoClip;
             String text = this.ToString();
             g.DrawString(text, drawFont, drawBrush, this.x, this.y, drawFormat);
-        }
-
-        public virtual void set(Color colour, params int[] list)
-        {
-            this.colour = colour;
-            this.x = list[0];
-            this.y = list[1];
-        }
-
-        public override string ToString() 
-        {
-            String text = base.ToString();
-            String[] sut = text.Split('.');
-            text = sut[sut.Length - 1];
-            return text;
         }
     }
 }

@@ -41,20 +41,5 @@ namespace SE4
 
             base.draw(g);
         }
-
-        /*public override double calcArea()
-        {
-            return sideLength;
-        }
-
-        public override double calcPerimeter()
-        {
-            return sideLength;
-        }*/
-
-        public override string ToString()
-        {
-            return ""; //TODO don't return null fix later
-        }
     }
 }

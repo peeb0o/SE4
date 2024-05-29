@@ -25,10 +25,5 @@ namespace SE4
             
              base.draw(g);
         }
-
-        public override string ToString()
-        {
-            return ""; //TODO don't return null fix later
-        }
     }
 }

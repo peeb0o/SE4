@@ -9,7 +9,6 @@ namespace SE4
 {
     public class Pen
     {
-      
         public void Draw(Color c, Graphics graphics, int penX, int penY)
         {
             // Draw the pen at the specified position

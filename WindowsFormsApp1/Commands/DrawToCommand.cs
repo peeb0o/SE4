@@ -40,7 +40,7 @@ namespace SE4
                 throw new InvalidParameterCountException("Invalid number of coordinates passed");
             }
 
-            if(coordinates[1].Equals("") || coordinates[0].Equals(""))
+            if(string.IsNullOrWhiteSpace(coordinates[1])|| string.IsNullOrWhiteSpace(coordinates[0]))
             {
                 throw new InvalidParameterCountException("Coordinate cannot be an empty string");
             }

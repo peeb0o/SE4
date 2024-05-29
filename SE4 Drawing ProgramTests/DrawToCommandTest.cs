@@ -45,7 +45,7 @@ namespace SE4_Drawing_ProgramTests
         }
 
         [TestMethod]
-        public void Execute_CircleSuccess_WithVariableXCoordinate()
+        public void Execute_LineSuccess_WithVariableXCoordinate()
         {
             //Setup
             variableManager.AddVariable("x", 100);
@@ -62,7 +62,7 @@ namespace SE4_Drawing_ProgramTests
         }
 
         [TestMethod]
-        public void Execute_CircleSuccess_WithVariableYCoordinate()
+        public void Execute_LineSuccess_WithVariableYCoordinate()
         {
             //Setup
             variableManager.AddVariable("y", 200);
@@ -79,7 +79,7 @@ namespace SE4_Drawing_ProgramTests
         }
 
         [TestMethod]
-        public void Execute_CircleSuccess_WithVariableCoordinates()
+        public void Execute_LineSuccess_WithVariableCoordinates()
         {
             //Setup
             variableManager.AddVariable("x", 100);
@@ -126,11 +126,34 @@ namespace SE4_Drawing_ProgramTests
         public void Execute_ThrowsException_InvalidParameterCountException_TooFewCoordinatesPassed()
         {
             //Setup
+            string[] parameters = { "drawto", "x" };
+
+            //Action
+            drawToCommand.Execute(shapeFactory, parameters, false);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidParameterCountException))]
+        public void Execute_ThrowsException_InvalidParameterCountException_EmptyStringAsCoordinatePassed()
+        {
+            //Setup
             string[] parameters = { "drawto", "x," };
 
             //Action
             drawToCommand.Execute(shapeFactory, parameters, false);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidParameterCountException))]
+        public void Execute_ThrowsException_InvalidParameterCountException_WhiteSpaceAsCoordinatePassed()
+        {
+            //Setup
+            string[] parameters = { "drawto", "x, " };
+
+            //Action
+            drawToCommand.Execute(shapeFactory, parameters, false);
+        }
+
 
         [TestMethod]
         [ExpectedException(typeof(CommandException))]

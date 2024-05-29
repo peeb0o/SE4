@@ -32,7 +32,7 @@ namespace SE4
 
             foreach (var error in errorMessages)
             {
-                g.DrawString($"Error: {error.message} (Line: {error.lineNumber})", SystemFonts.DefaultFont, Brushes.Black, new Point(10, yPosition));
+                g.DrawString($"{error.message} (Line: {error.lineNumber})", SystemFonts.DefaultFont, Brushes.Black, new Point(10, yPosition));
                 yPosition += lineHeight + 5;
             }
         }

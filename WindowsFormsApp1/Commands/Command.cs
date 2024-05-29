@@ -8,6 +8,6 @@ namespace SE4
 {
     public abstract class Command
     {
-        public abstract void Execute(ShapeFactory shapeFactory, string[] parameters);
+        public abstract void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck);
     }
 }

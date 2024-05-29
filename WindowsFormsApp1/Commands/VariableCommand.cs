@@ -19,11 +19,11 @@ namespace SE4.Service
             this.variableManager = variableManager;
         }
 
-        public override void Execute(ShapeFactory shapeFactory, string[] parameters)
+        public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
             try
             {
-                ProcessVarCommand(shapeFactory, parameters);
+                ProcessVarCommand(shapeFactory, parameters, syntaxCheck);
             }
             catch (InvalidParameterCountException ex)
             {
@@ -35,7 +35,7 @@ namespace SE4.Service
             }
         }
 
-        private void ProcessVarCommand(ShapeFactory shapefactory, string[] parameters)
+        private void ProcessVarCommand(ShapeFactory shapefactory, string[] parameters, bool syntaxCheck)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace SE4.Service
                         throw new CommandException("Variable with this name already exists");
                     }
 
-                    ProcessCommands(variableName, variableValue);
+                    ProcessCommands(variableName, variableValue, syntaxCheck);
                 }
                 // four elements in array means value has been set 
                 else 
@@ -85,7 +85,7 @@ namespace SE4.Service
                         throw new CommandException($"Invalid Variable Name: '{variableName}'");
                     }
 
-                    ProcessCommands(variableName, variableValue);
+                    ProcessCommands(variableName, variableValue, syntaxCheck);
                 }
             }
             catch(Exception ex)
@@ -97,8 +97,9 @@ namespace SE4.Service
             }
         }
 
-        public void ProcessCommands(string variableName, int variableValue)
+        public void ProcessCommands(string variableName, int variableValue, bool syntaxCheck)
         {
+            if(!syntaxCheck)
             variableManager.AddVariable(variableName, variableValue);
         }
     }

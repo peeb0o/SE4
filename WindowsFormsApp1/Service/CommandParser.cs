@@ -29,6 +29,7 @@ namespace SE4
         private EqualsOperatorHandler equalsHandler;
         private FlashingCommand flashCommand;
         private FlashCommandStop flashStop;
+        private MoveToCommand moveToCommand;
         private List<string> loopCommands;
         private string loopCondition;
         private bool isInLoop = false;
@@ -36,6 +37,7 @@ namespace SE4
         private bool isInIf = false;
         private string ifCondition;
         private int lineNumber;
+        public bool syntaxCheck { get; set; } = false;
 
         public CommandParser(ShapeFactory factory, VariableManager variableManager, int lineNumber)
         {
@@ -52,6 +54,7 @@ namespace SE4
             operatorHandler = new ArithmeticOperatorHandler(variableManager, shapeFactory);
             comparisonHandler = new ComparisonOperatorHandler(variableManager);
             equalsHandler = new EqualsOperatorHandler(variableManager);
+            moveToCommand = new MoveToCommand();
             flashCommand = new FlashingCommand();
             flashStop = new FlashCommandStop();
             loopCommands = new List<string>();
@@ -131,10 +134,10 @@ namespace SE4
                 switch (commandType)
                 {
                     case "flash":
-                        flashCommand.Execute(shapeFactory, parts);
+                        flashCommand.Execute(shapeFactory, parts, syntaxCheck);
                         break;
                     case "stopflash":
-                        flashStop.Execute(shapeFactory, parts);
+                        flashStop.Execute(shapeFactory, parts, syntaxCheck);
                         break;
                     case "loop":
                         loopCondition = command.Substring(command.IndexOf(' ') + 1).Trim();
@@ -147,26 +150,28 @@ namespace SE4
                         ifCommands.Clear();
                         break;
                     case "var":
-                        variableCommand.Execute(shapeFactory, parts);
+                        variableCommand.Execute(shapeFactory, parts, syntaxCheck);
                         break;
                     case "drawto":
-                        drawToCommand.Execute(shapeFactory, parts);
+                        drawToCommand.Execute(shapeFactory, parts, syntaxCheck);
                         break;
                     case "moveto":
+                        moveToCommand.Execute(shapeFactory, parts, syntaxCheck);
+                        break;
                     case "pen":
-                        penCommand.Execute(shapeFactory, parts);
+                        penCommand.Execute(shapeFactory, parts, syntaxCheck);
                         break;
                     case "fill":
-                        fillCommand.Execute(shapeFactory, parts);
+                        fillCommand.Execute(shapeFactory, parts, syntaxCheck);
                         break;
                     case "circle":
-                        circleCommand.Execute(shapeFactory, parts);
+                        circleCommand.Execute(shapeFactory, parts, syntaxCheck);
                         break;
                     case "rectangle":
-                        rectangleCommand.Execute(shapeFactory, parts);
+                        rectangleCommand.Execute(shapeFactory, parts, syntaxCheck);
                         break;
                     case "triangle":
-                        triangleCommand.Execute(shapeFactory, parts);
+                        triangleCommand.Execute(shapeFactory, parts, syntaxCheck);
                         break;
                     case "clear":
                         shapeFactory.Clear();
@@ -181,9 +186,9 @@ namespace SE4
             }
             catch (Exception ex)
             {
-                PanelUtilities.AddErrorMessage(ex.Message, lineNumber);
-                PanelUtilities.WriteToPanel(shapeFactory.drawPanel);
-                throw;
+                /*PanelUtilities.AddErrorMessage(ex.Message, lineNumber);
+                PanelUtilities.WriteToPanel(shapeFactory.drawPanel);*/
+                throw ex;
             }
         }
 

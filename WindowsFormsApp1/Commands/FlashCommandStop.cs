@@ -9,18 +9,15 @@ namespace SE4.Commands
 {
     public class FlashCommandStop : Command
     {
-        public override void Execute(ShapeFactory shapeFactory, string[] parameters)
+        public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
             if (parameters.Length != 1)
             {
-                throw new InvalidParameterCountException("Command for stop flash should be single command only");
+                throw new InvalidParameterCountException("Command for stop flash should be single command only: <stopflash>");
             }
-            shapeFactory.StopFlash();
-        }
 
-        public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
-        {
-            throw new NotImplementedException();
+            if(!syntaxCheck)
+            shapeFactory.StopFlash();
         }
     }
 }

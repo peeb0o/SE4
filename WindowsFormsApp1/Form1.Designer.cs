@@ -40,6 +40,7 @@ namespace SE4
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.syntaxButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -78,7 +79,7 @@ namespace SE4
             // 
             // Save
             // 
-            this.Save.Location = new System.Drawing.Point(94, 3);
+            this.Save.Location = new System.Drawing.Point(101, 3);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
             this.Save.TabIndex = 5;
@@ -123,23 +124,25 @@ namespace SE4
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1659, 867);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.Controls.Add(this.Load, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.Save, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.syntaxButton, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(504, 738);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 123F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(183, 123);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(296, 123);
             this.tableLayoutPanel3.TabIndex = 6;
             // 
             // tableLayoutPanel2
@@ -155,8 +158,19 @@ namespace SE4
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(489, 123);
             this.tableLayoutPanel2.TabIndex = 5;
+            // 
+            // syntaxButton
+            // 
+            this.syntaxButton.Location = new System.Drawing.Point(199, 3);
+            this.syntaxButton.Name = "syntaxButton";
+            this.syntaxButton.Size = new System.Drawing.Size(75, 23);
+            this.syntaxButton.TabIndex = 7;
+            this.syntaxButton.Text = "Syntax";
+            this.syntaxButton.UseVisualStyleBackColor = true;
+            this.syntaxButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.syntaxButtonClicked);
             // 
             // Form1
             // 
@@ -188,6 +202,7 @@ namespace SE4
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel3;
         private TableLayoutPanel tableLayoutPanel2;
+        private Button syntaxButton;
     }
 }
 

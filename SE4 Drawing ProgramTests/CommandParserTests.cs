@@ -20,6 +20,7 @@ namespace SE4.Tests
         private Panel panel;
         private VariableManager variableManager;
         private int lineNumber = 0; // add logic later
+        private bool syntaxCheck = false;
 
         [TestInitialize]
         public void Setup()

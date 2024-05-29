@@ -13,13 +13,14 @@ namespace SE4
     {
         private Graphics graphics;
         private VariableManager variableManager;
+        
 
         public TriangleCommand(VariableManager variableManager)
         {
             this.variableManager = variableManager;
         }
 
-        public override void Execute(ShapeFactory shapeFactory, string[] parameters)
+        public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
             graphics = shapeFactory.drawPanel.CreateGraphics();
 
@@ -28,11 +29,14 @@ namespace SE4
                 throw new InvalidParameterCountException("Invalid number of parameters");
             }
 
+           
             int length = GetLengthValue(parameters[1]);
 
             Triangle triangle = new Triangle(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, length, shapeFactory.fill);
-            shapeFactory.AddShape(triangle);      
-            }
+
+            if (!syntaxCheck)
+                shapeFactory.AddShape(triangle);
+        }
 
         private int GetLengthValue(string length)
         {

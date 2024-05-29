@@ -18,14 +18,14 @@ namespace SE4
         {
             this.variableManager = variableManager;
         }
-        public override void Execute(ShapeFactory shapeFactory, string[] parameters)
+        public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
             graphics = shapeFactory.drawPanel.CreateGraphics();
 
             //Check parameters are exactly 2 
             if (parameters.Length != 2)
             {
-                throw new InvalidParameterCountException("Invalid number of parameters");
+                throw new InvalidParameterCountException("Invalid number of parameters in circle command. Syntax: Circle <radius>");
             }
 
             //Split on space, radius will always be second element
@@ -36,10 +36,13 @@ namespace SE4
 
             //Draw circle
             Circle circle = new Circle(shapeFactory.penColor, shapeFactory.penX - radius, shapeFactory.penY - radius, radius, shapeFactory.fill);
+
+            //Check if in syntax check and draw if not 
+            if (!syntaxCheck)
             shapeFactory.AddShape(circle);
         }
 
-        private int GetRadiusValue(string radius)
+            private int GetRadiusValue(string radius)
         {
             //Check if variable
             if (variableManager.VariableExists(radius))

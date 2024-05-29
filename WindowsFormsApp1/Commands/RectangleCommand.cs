@@ -19,36 +19,35 @@ namespace SE4
             this.variableManager = variableManager;
         }
 
-        public override void Execute(ShapeFactory shapeFactory, string[] parameters)
+        public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
             graphics = shapeFactory.drawPanel.CreateGraphics();
 
             //Check parameters are exactly 2 
             if (parameters.Length != 2)
             {
-                throw new InvalidParameterCountException("Invalid number of parameters");
+                throw new InvalidParameterCountException("Invalid number of parameters for drawing a rectangle. Syntax: rectangle <width,height>");
             }
 
-            if (parameters.Length == 2)
+            
+            //Split dimensions on the comma
+            string[] dimensions = parameters[1].Split(',');
+
+            //Check correct number of dimensions
+            if (dimensions.Length != 2)
             {
-                //Split dimensions on the comma
-                string[] dimensions = parameters[1].Split(',');
-
-                //Check correct number of dimensions
-                if (dimensions.Length != 2)
-                {
-                    throw new InvalidParameterCountException("Invalid number of dimensions passed");
-                }
-
-                //Call method to check if variable or literal
-                int width = GetDimensionValue(dimensions[0]);
-                int height = GetDimensionValue(dimensions[1]);
-
-                //Draw rectangle
-                Rectangle rect = new Rectangle(shapeFactory.penColor, shapeFactory.penX - (width /2), shapeFactory.penY - (height /2), width, height, shapeFactory.fill);
-                shapeFactory.AddShape(rect);
-                
+                throw new InvalidParameterCountException("Invalid number of dimensions passed. Please pass width and height.");
             }
+
+            //Call method to check if variable or literal
+            int width = GetDimensionValue(dimensions[0]);
+            int height = GetDimensionValue(dimensions[1]);
+
+            //Draw rectangle
+            Rectangle rect = new Rectangle(shapeFactory.penColor, shapeFactory.penX - (width /2), shapeFactory.penY - (height /2), width, height, shapeFactory.fill);
+            
+            if(!syntaxCheck)
+            shapeFactory.AddShape(rect);
         }
 
         private int GetDimensionValue(string dimension)

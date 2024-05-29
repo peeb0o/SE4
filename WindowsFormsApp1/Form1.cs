@@ -19,7 +19,7 @@ namespace SE4
         private bool runCommandEntered = false;
         private VariableManager variableManager;
         private int lineNumber = 1;
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -194,6 +194,34 @@ namespace SE4
                 string text = System.IO.File.ReadAllText(file);
                 multiLineTextBox.Text = text;
             }
+        }
+
+        private void syntaxButtonClicked(object sender, EventArgs e)
+        {
+            string[] commands = multiLineTextBox.Lines;
+
+            commandParser.syntaxCheck = true;
+            foreach (string cmd in commands)
+            {
+                if (!string.IsNullOrWhiteSpace(cmd))
+                {
+                    try
+                    {
+                        commandParser.ParseCommand(cmd, lineNumber);
+                        
+                        PanelUtilities.AddErrorMessage("Syntax check complete no errors found", lineNumber);
+                        PanelUtilities.WriteToPanel(drawPanel);
+                    }
+                    catch (Exception ex)
+                    {
+                        PanelUtilities.AddErrorMessage($"Syntax error found: {ex.Message} on:", lineNumber);
+                        PanelUtilities.WriteToPanel(drawPanel);
+                    }
+                }
+                lineNumber++;
+            }
+            lineNumber = 1;
+            commandParser.syntaxCheck = false;
         }
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)

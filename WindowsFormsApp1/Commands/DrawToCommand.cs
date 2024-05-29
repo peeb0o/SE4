@@ -21,7 +21,7 @@ namespace SE4
             this.variableManager = variableManager;
         }
 
-        public override void Execute(ShapeFactory shapeFactory, string[] parameters)
+        public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
 
             //Check parameters are exactly 2 
@@ -46,8 +46,13 @@ namespace SE4
 
             //Draw line
             DrawTo line = new DrawTo(shapeFactory.penColor, shapeFactory.penX, shapeFactory.penY, x, y);
-            shapeFactory.AddShape(line);
-            shapeFactory.MovePen(x, y);
+
+            //Only draw and move pen if not in syntax check
+            if (!syntaxCheck)
+            {
+                shapeFactory.AddShape(line);
+                shapeFactory.MovePen(x, y);
+            }
             
         }
 

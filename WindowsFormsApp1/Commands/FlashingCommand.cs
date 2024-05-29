@@ -20,7 +20,7 @@ namespace SE4.Commands
         {"white", Color.White},
     };
 
-        public override void Execute(ShapeFactory shapeFactory, string[] parameters)
+        public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
             if (parameters.Length != 2)
             {
@@ -29,12 +29,8 @@ namespace SE4.Commands
 
             Color[] colours = ExtractColors(parameters[1]);
 
+            if(!syntaxCheck)
             shapeFactory.StartFlash(colours);
-        }
-
-        public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
-        {
-            throw new NotImplementedException();
         }
 
         private Color[] ExtractColors(string combinedColours)
@@ -47,6 +43,10 @@ namespace SE4.Commands
                 {
                     colours.Add(entry.Value);
                     combinedColours = combinedColours.Replace(entry.Key, "");
+                }
+                else
+                {
+                    throw new CommandException("Invalid value passed, please pass a valid colour");
                 }
             }
 

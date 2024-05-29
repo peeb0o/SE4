@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE4.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -11,42 +12,32 @@ namespace SE4
     {
         Pen pen = new Pen();
 
-        public override void Execute(ShapeFactory shapeFactory, string[] parameters)
+        public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
-            if (parameters.Length == 2)
+            if (parameters.Length != 2)
             {
-                string colorString = parameters[1];
-                Color color;
-
-                try
-                {
-                    string[] coordinates = parameters[1].Split(',');
-
-                    if (coordinates.Length == 2 && int.TryParse(coordinates[0], out int x) && int.TryParse(coordinates[1], out int y))
-                    {
-                        shapeFactory.MovePen(x, y);
-                    }
-                    else
-                    {
-                        try
-                        {
-                            color = Color.FromName(colorString);
-                        }
-                        catch
-                        {
-                            color = Color.Black;
-                        }
-
-                        shapeFactory.SetPenColour(color);
-                    }
-
-                }
-                catch (Exception)
-
-                {
-                    Console.WriteLine("Not enough params for move pen");
-                }       
+                throw new InvalidParameterCountException("Invalid number of parameters passed for pen command. Syntax: pen <colour>");
             }
-        }
-    }
+            
+            Color colour;
+
+            string colourString = parameters[1];
+
+            
+            colour = Color.FromName(colourString);
+
+            if (!colour.IsKnownColor)
+            {
+                colour = Color.Black;
+                shapeFactory.SetPenColour(colour);
+                throw new InvalidColourException("Invalid colour passed, setting to default colour");
+            }
+            
+            if(!syntaxCheck)
+            shapeFactory.SetPenColour(colour);
+            
+        }             
+    } 
 }
+
+

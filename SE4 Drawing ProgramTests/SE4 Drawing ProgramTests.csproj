@@ -53,9 +53,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CircleCommandTest.cs" />
-    <Compile Include="CommandParserTests.cs" />
-    <Compile Include="DrawToCommandTest.cs" />
+    <Compile Include="CommandsTest\CircleCommandTest.cs" />
+    <Compile Include="ServiceTest\CommandParserTests.cs" />
+    <Compile Include="CommandsTest\DrawToCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

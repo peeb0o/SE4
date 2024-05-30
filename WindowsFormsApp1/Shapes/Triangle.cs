@@ -9,7 +9,7 @@ namespace SE4
 {
     public class Triangle : Shape
     {
-        private int sideLength;
+        public int sideLength { get; private set; }
         private Boolean fill;
 
         public Triangle(Color colour, int x, int y, int sideLength, bool fill) : base(colour, x, y)

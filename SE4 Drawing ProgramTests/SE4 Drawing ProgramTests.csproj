@@ -59,6 +59,7 @@
     <Compile Include="CommandsTest\MoveToCommandTest.cs" />
     <Compile Include="CommandsTest\PenCommandTest.cs" />
     <Compile Include="CommandsTest\RectangleCommandTest.cs" />
+    <Compile Include="CommandsTest\TriangleCommandTest.cs" />
     <Compile Include="ServiceTest\CommandParserTests.cs" />
     <Compile Include="CommandsTest\DrawToCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

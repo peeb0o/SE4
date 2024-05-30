@@ -14,7 +14,6 @@ namespace SE4
         private Graphics graphics;
         private VariableManager variableManager;
         
-
         public TriangleCommand(VariableManager variableManager)
         {
             this.variableManager = variableManager;
@@ -29,6 +28,10 @@ namespace SE4
                 throw new InvalidParameterCountException("Invalid number of parameters");
             }
 
+            if (string.IsNullOrWhiteSpace(parameters[1]))
+            {
+                throw new InvalidParameterCountException($"Invalid side length value: {parameters[1]}");
+            }
            
             int length = GetLengthValue(parameters[1]);
 
@@ -53,7 +56,7 @@ namespace SE4
             }
 
             //Throw exception in case invalid radius passed
-            throw new CommandException($"Invalid radius value: {length}");
+            throw new CommandException($"Invalid length value: {length}");
         }
 
     }   

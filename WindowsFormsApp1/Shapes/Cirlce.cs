@@ -18,6 +18,11 @@ namespace SE4
             this.fill = fill;
         }
 
+        public bool IsFilled()
+        {
+            return fill;
+        }
+
         public override void draw(Graphics g)
         {
             if (fill)

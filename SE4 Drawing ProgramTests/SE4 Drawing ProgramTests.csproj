@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CommandsTest\CircleCommandTest.cs" />
+    <Compile Include="CommandsTest\FillCommandTest.cs" />
     <Compile Include="ServiceTest\CommandParserTests.cs" />
     <Compile Include="CommandsTest\DrawToCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

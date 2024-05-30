@@ -28,9 +28,13 @@ namespace SE4
             {
                 shapeFactory.SetFillValue(false);
             }
-            else
+            else if (!syntaxCheck)
             {
                 throw new CommandException("Invalid value passed. Please set fill value to either on or off.");
+            }
+            else
+            {
+                return;
             }
         }
     }

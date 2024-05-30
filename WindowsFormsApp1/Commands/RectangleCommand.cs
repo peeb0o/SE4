@@ -39,6 +39,11 @@ namespace SE4
                 throw new InvalidParameterCountException("Invalid number of dimensions passed. Please pass width and height.");
             }
 
+            if (string.IsNullOrWhiteSpace(dimensions[0]) || string.IsNullOrWhiteSpace(dimensions[1]))
+            {
+                throw new InvalidParameterCountException("Invalid dimension passed. Please pass width and height.");
+            }
+
             //Call method to check if variable or literal
             int width = GetDimensionValue(dimensions[0]);
             int height = GetDimensionValue(dimensions[1]);

@@ -9,7 +9,8 @@ namespace SE4
 {
     public class Rectangle : Shape
     {
-        private int width, height;
+        public int width { get; private set; }
+        public int height { get; private set; }
         private Boolean fill;
 
         public Rectangle(Color colour, int x, int y, int width, int height, bool fill) : base(colour, x, y)

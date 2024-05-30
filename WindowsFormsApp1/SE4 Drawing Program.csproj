@@ -68,7 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\FlashCommandStop.cs" />
+    <Compile Include="Commands\FlashingCommandStop.cs" />
     <Compile Include="Commands\FlashingCommand.cs" />
     <Compile Include="Commands\MoveToCommand.cs" />
     <Compile Include="Exceptions\InvalidColourException.cs" />

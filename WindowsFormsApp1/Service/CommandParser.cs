@@ -28,7 +28,7 @@ namespace SE4
         private ComparisonOperatorHandler comparisonHandler;
         private EqualsOperatorHandler equalsHandler;
         private FlashingCommand flashCommand;
-        private FlashCommandStop flashStop;
+        private FlashingCommandStop flashStop;
         private MoveToCommand moveToCommand;
         private List<string> loopCommands;
         private string loopCondition;
@@ -54,9 +54,9 @@ namespace SE4
             operatorHandler = new ArithmeticOperatorHandler(variableManager, shapeFactory);
             comparisonHandler = new ComparisonOperatorHandler(variableManager);
             equalsHandler = new EqualsOperatorHandler(variableManager);
-            moveToCommand = new MoveToCommand();
+            moveToCommand = new MoveToCommand(variableManager);
             flashCommand = new FlashingCommand();
-            flashStop = new FlashCommandStop();
+            flashStop = new FlashingCommandStop();
             loopCommands = new List<string>();
             ifCommands = new List<string>();
         }

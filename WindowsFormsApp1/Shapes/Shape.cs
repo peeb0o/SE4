@@ -28,8 +28,6 @@ namespace SE4
             SolidBrush drawBrush = new SolidBrush(Color.Black);
             StringFormat drawFormat = new StringFormat();
             drawFormat.FormatFlags = StringFormatFlags.NoClip;
-            String text = this.ToString();
-            g.DrawString(text, drawFont, drawBrush, this.x, this.y, drawFormat);
         }
     }
 }

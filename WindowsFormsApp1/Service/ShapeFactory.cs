@@ -94,6 +94,7 @@ namespace SE4
             penX = x;
             penY = y;
             drawPanel.Refresh();
+            this.SetPenColour(Color.Black);
         }
 
         public void MovePen(int x, int y)
@@ -105,7 +106,7 @@ namespace SE4
 
         public void SetPenColour(Color newColor)
         {
-             penColor = newColor;
+            penColor = newColor;
             drawPanel.Refresh();
         }
 

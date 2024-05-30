@@ -19,6 +19,7 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
         private Panel panel;
         private VariableManager variableManager;
         private FillCommand fillCommand;
+        private CircleCommand circleCommand;
 
         [TestInitialize]
         public void Setup()
@@ -27,6 +28,7 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             variableManager = VariableManager.Instance;
             shapeFactory = new ShapeFactory(panel);
             fillCommand = new FillCommand();
+            circleCommand = new CircleCommand(variableManager);
         }
 
         [TestMethod]
@@ -35,8 +37,7 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             //Setup
             string[] parameters = { "fill", "on" };
             string[] circleParams = { "circle", "100" };
-            CircleCommand circleCommand = new CircleCommand(variableManager);
-
+           
             //Action 
             fillCommand.Execute(shapeFactory, parameters, false);
             circleCommand.Execute(shapeFactory, circleParams, false);
@@ -53,7 +54,6 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             //Setup
             string[] parameters = { "fill", "off" };
             string[] circleParams = { "circle", "100" };
-            CircleCommand circleCommand = new CircleCommand(variableManager);
 
             //Action 
             fillCommand.Execute(shapeFactory, parameters, false);

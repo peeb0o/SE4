@@ -1,4 +1,5 @@
 ﻿using SE4.Exceptions;
+using SE4.Variables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,12 @@ namespace SE4.Commands
 {
     public class MoveToCommand : Command
     {
+        private VariableManager variableManager;
+        public MoveToCommand(VariableManager variableManager)
+        {
+            this.variableManager = variableManager;
+        }
+
         public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
             if (parameters.Length != 2)
@@ -18,15 +25,42 @@ namespace SE4.Commands
 
             string[] coordinates = parameters[1].Split(',');
 
-            if (coordinates.Length == 2 && int.TryParse(coordinates[0], out int x) && int.TryParse(coordinates[1], out int y))
+            if (coordinates.Length != 2)
             {
-                if (!syntaxCheck)
-                    shapeFactory.MovePen(x, y);
+                throw new InvalidParameterCountException("Invalid number of coordinates passed for moveto command. Syntax: moveto <x,y>");
+
             }
-            else if (!int.TryParse(coordinates[0], out int x1) || !int.TryParse(coordinates[1], out int y1))
+
+            if (string.IsNullOrWhiteSpace(coordinates[1]) || string.IsNullOrWhiteSpace(coordinates[0]))
             {
-                throw new CommandException("Invalid values passed for moveto command.");
+                throw new InvalidParameterCountException("Coordinate cannot be an empty string");
             }
+
+            //Check if coordinate is a variable or literal
+            int x = GetCoordinateValue(coordinates[0]);
+            int y = GetCoordinateValue(coordinates[1]);
+
+            if (!syntaxCheck)
+                shapeFactory.MovePen(x, y);
+
+        }
+
+        private int GetCoordinateValue(string coordinate)
+        {
+            //Check if variable
+            if (variableManager.VariableExists(coordinate))
+            {
+                return variableManager.GetVariableValue(coordinate);
+            }
+
+            //Otherwise tryparse int
+            if (int.TryParse(coordinate, out int value))
+            {
+                return value;
+            }
+
+            //Throw exception in case invalid coordinate passed
+            throw new CommandException($"Invalid dimension value: {coordinate}");
         }
     }
 }

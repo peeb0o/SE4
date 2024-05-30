@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SE4.Commands
 {
-    public class FlashCommandStop : Command
+    public class FlashingCommandStop : Command
     {
         public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {

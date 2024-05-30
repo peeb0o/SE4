@@ -18,7 +18,7 @@ namespace SE4
             {
                 throw new InvalidParameterCountException("Invalid number of parameters passed for pen command. Syntax: pen <colour>");
             }
-            
+
             Color colour;
 
             string colourString = parameters[1];

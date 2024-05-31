@@ -39,8 +39,8 @@ namespace SE4
             this.multiLineTextBox = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.syntaxButton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -54,7 +54,7 @@ namespace SE4
             this.runButton.TabIndex = 0;
             this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = true;
-            this.runButton.Click += new System.EventHandler(this.runButtonClicked);
+            this.runButton.Click += new System.EventHandler(this.RunButtonClicked);
             // 
             // drawPanel
             // 
@@ -65,7 +65,7 @@ namespace SE4
             this.drawPanel.Name = "drawPanel";
             this.drawPanel.Size = new System.Drawing.Size(1149, 723);
             this.drawPanel.TabIndex = 1;
-            this.drawPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.drawPanel_Paint);
+            this.drawPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawPanel_Paint);
             // 
             // singleCommandTextBox
             // 
@@ -74,8 +74,8 @@ namespace SE4
             this.singleCommandTextBox.Name = "singleCommandTextBox";
             this.singleCommandTextBox.Size = new System.Drawing.Size(483, 20);
             this.singleCommandTextBox.TabIndex = 3;
-            this.singleCommandTextBox.TextChanged += new System.EventHandler(this.singleCommandTextBoxRunCommand);
-            this.singleCommandTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.singleCommandTextBoxEnterPressed);
+            this.singleCommandTextBox.TextChanged += new System.EventHandler(this.SingleCommandTextBoxRunCommand);
+            this.singleCommandTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SingleCommandTextBoxEnterPressed);
             // 
             // Save
             // 
@@ -85,7 +85,7 @@ namespace SE4
             this.Save.TabIndex = 5;
             this.Save.Text = "Save";
             this.Save.UseVisualStyleBackColor = true;
-            this.Save.Click += new System.EventHandler(this.saveButtonClicked);
+            this.Save.Click += new System.EventHandler(this.SaveButtonClicked);
             // 
             // Load
             // 
@@ -105,7 +105,7 @@ namespace SE4
             this.multiLineTextBox.Size = new System.Drawing.Size(489, 723);
             this.multiLineTextBox.TabIndex = 4;
             this.multiLineTextBox.Text = "";
-            this.multiLineTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.multiLineTextBox.TextChanged += new System.EventHandler(this.RichTextBox1_TextChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -145,6 +145,16 @@ namespace SE4
             this.tableLayoutPanel3.Size = new System.Drawing.Size(296, 123);
             this.tableLayoutPanel3.TabIndex = 6;
             // 
+            // syntaxButton
+            // 
+            this.syntaxButton.Location = new System.Drawing.Point(199, 3);
+            this.syntaxButton.Name = "syntaxButton";
+            this.syntaxButton.Size = new System.Drawing.Size(75, 23);
+            this.syntaxButton.TabIndex = 7;
+            this.syntaxButton.Text = "Syntax";
+            this.syntaxButton.UseVisualStyleBackColor = true;
+            this.syntaxButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SyntaxButtonClicked);
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
@@ -161,16 +171,6 @@ namespace SE4
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(489, 123);
             this.tableLayoutPanel2.TabIndex = 5;
-            // 
-            // syntaxButton
-            // 
-            this.syntaxButton.Location = new System.Drawing.Point(199, 3);
-            this.syntaxButton.Name = "syntaxButton";
-            this.syntaxButton.Size = new System.Drawing.Size(75, 23);
-            this.syntaxButton.TabIndex = 7;
-            this.syntaxButton.Text = "Syntax";
-            this.syntaxButton.UseVisualStyleBackColor = true;
-            this.syntaxButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.syntaxButtonClicked);
             // 
             // Form1
             // 

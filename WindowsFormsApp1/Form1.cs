@@ -30,12 +30,12 @@ namespace SE4
             commandParser = new CommandParser(shapeManager, variableManager, lineNumber);
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        private void RichTextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void runButtonClicked(object sender, EventArgs e)
+        private void RunButtonClicked(object sender, EventArgs e)
         {
             // if to check for commands in singleline textbox
             if (!string.IsNullOrWhiteSpace(singleCommandTextBox.Text))
@@ -47,17 +47,18 @@ namespace SE4
                     try
                     {
                         commandParser.ParseCommand(command, lineNumber);
-                        lineNumber++;
                         Console.WriteLine("Parser called"); // for debugging purposes - remove later
                     }
                     catch (InvalidParameterCountException ex)
                     {
-                        lineNumber++;
+                        PanelUtilities.AddErrorMessage($"{ex.Message}" + " on ", lineNumber);
+                        PanelUtilities.WriteToPanel(drawPanel);
                         Console.WriteLine($"Error: {ex.Message}");
                     }
                     catch(CommandException ex)
                     {
-                        lineNumber++;
+                        PanelUtilities.AddErrorMessage($"{ex.Message}" + " on ", lineNumber);
+                        PanelUtilities.WriteToPanel(drawPanel);
                         Console.WriteLine($"Error: {ex.Message}");
                     }
                 }
@@ -75,26 +76,28 @@ namespace SE4
                         try
                         {
                             commandParser.ParseCommand(command, lineNumber);
-                            lineNumber++;
                             Console.WriteLine("Parser called"); // for debugging purposes - remove later
                         }
                         catch (InvalidParameterCountException ex)
                         {
-                            lineNumber++;
+                            PanelUtilities.AddErrorMessage($"{ex.Message}" + " on ", lineNumber);
+                            PanelUtilities.WriteToPanel(drawPanel);
                             Console.WriteLine($"Error: {ex.Message}");
                         }
                         catch (CommandException ex)
                         {
-                            lineNumber++;
+                            PanelUtilities.AddErrorMessage($"{ex.Message}" + " on ", lineNumber);
+                            PanelUtilities.WriteToPanel(drawPanel);
                             Console.WriteLine($"Error: {ex.Message}");
                         }
                     }
+                    lineNumber++;
                 }
             }
             lineNumber = 1;
         }
 
-        private void singleCommandTextBoxEnterPressed(object sender, KeyEventArgs e)
+        private void SingleCommandTextBoxEnterPressed(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -106,17 +109,18 @@ namespace SE4
                     try
                     {
                         commandParser.ParseCommand(command, lineNumber);
-                        lineNumber++;
                         Console.WriteLine("Parser called"); // for debugging purposes - remove later
                     }
                     catch (InvalidParameterCountException ex)
                     {
-                        lineNumber++;
+                        PanelUtilities.AddErrorMessage($"{ex.Message}" + " on ", lineNumber);
+                        PanelUtilities.WriteToPanel(drawPanel);
                         Console.WriteLine($"Error: {ex.Message}");
                     }
                     catch (CommandException ex)
                     {
-                        lineNumber++;
+                        PanelUtilities.AddErrorMessage($"{ex.Message}" + " on ", lineNumber);
+                        PanelUtilities.WriteToPanel(drawPanel);
                         Console.WriteLine($"Error: {ex.Message}");
                     }
                 }
@@ -139,11 +143,15 @@ namespace SE4
                             catch (InvalidParameterCountException ex)
                             {
                                 lineNumber++;
+                                PanelUtilities.AddErrorMessage($"{ex.Message}" + " on ", lineNumber);
+                                PanelUtilities.WriteToPanel(drawPanel);
                                 Console.WriteLine($"Error: {ex.Message}");
                             }
                             catch (CommandException ex)
                             {
                                 lineNumber++;
+                                PanelUtilities.AddErrorMessage($"{ex.Message}" + " on ", lineNumber);
+                                PanelUtilities.WriteToPanel(drawPanel);
                                 Console.WriteLine($"Error: {ex.Message}");
                             }
                         }
@@ -154,7 +162,7 @@ namespace SE4
             lineNumber = 1;
         }
 
-        private void singleCommandTextBoxRunCommand(object sender, EventArgs e)
+        private void SingleCommandTextBoxRunCommand(object sender, EventArgs e)
         {
             //string command = singleCommandTextBox.Text.Trim();
             if (singleCommandTextBox.Text.Trim().ToLower().Equals("run"))
@@ -163,7 +171,7 @@ namespace SE4
             }
         }
 
-        private void saveButtonClicked(object sender, EventArgs e)
+        private void SaveButtonClicked(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
 
@@ -196,7 +204,7 @@ namespace SE4
             }
         }
 
-        private void syntaxButtonClicked(object sender, EventArgs e)
+        private void SyntaxButtonClicked(object sender, EventArgs e)
         {
             string[] commands = multiLineTextBox.Lines;
 
@@ -224,12 +232,12 @@ namespace SE4
             commandParser.syntaxCheck = false;
         }
 
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        private void TableLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void drawPanel_Paint(object sender, PaintEventArgs e)
+        private void DrawPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }

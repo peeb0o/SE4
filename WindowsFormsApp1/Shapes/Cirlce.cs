@@ -35,7 +35,7 @@ namespace SE4
             System.Drawing.Pen p = new System.Drawing.Pen(colour, 2);
             g.DrawEllipse(p, x, y, radius * 2, radius * 2);
             }
-            base.draw(g);
+            
         }
     }
 }

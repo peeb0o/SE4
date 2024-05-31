@@ -22,12 +22,11 @@ namespace SE4
             this.y = y;
         }
 
-        public virtual void draw(Graphics g)
+        public abstract void draw(Graphics g);
+        
+        public void SetColour(Color colour)
         {
-            Font drawFont = new Font("Arial", 12);
-            SolidBrush drawBrush = new SolidBrush(Color.Black);
-            StringFormat drawFormat = new StringFormat();
-            drawFormat.FormatFlags = StringFormatFlags.NoClip;
+            this.colour = colour;
         }
     }
 }

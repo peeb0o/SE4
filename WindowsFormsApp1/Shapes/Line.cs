@@ -21,9 +21,7 @@ namespace SE4
         public override void draw(Graphics g)
         {
              System.Drawing.Pen p = new System.Drawing.Pen(colour, 2);
-             g.DrawLine(p, startX, startY, endX, endY);
-            
-             base.draw(g);
+             g.DrawLine(p, startX, startY, endX, endY); 
         }
     }
 }

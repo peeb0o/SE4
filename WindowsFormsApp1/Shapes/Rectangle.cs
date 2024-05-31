@@ -34,7 +34,6 @@ namespace SE4
                 System.Drawing.Pen p = new System.Drawing.Pen(colour, 2);
                 g.DrawRectangle(p, x, y, width, height);
             }
-            base.draw(g);
         }
     }
 }

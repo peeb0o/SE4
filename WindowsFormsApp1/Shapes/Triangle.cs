@@ -38,8 +38,6 @@ namespace SE4
                 System.Drawing.Pen p = new System.Drawing.Pen(colour, 2);
                 g.DrawPolygon(p, points);
             }
-
-            base.draw(g);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace SE4
         public Panel drawPanel;
         public List<Shape> shapes = new List<Shape>();
         private Bitmap drawBitmap;
+        private Bitmap flashingBitmap;
         private Pen pen = new Pen();
         public int penX { get; private set; }
         public int penY { get; private set; }
@@ -28,13 +29,14 @@ namespace SE4
         {
             drawPanel = panel;
             drawBitmap = new Bitmap(panel.Width, panel.Height);
+            flashingBitmap = new Bitmap(panel.Width, panel.Height);
             drawPanel.Paint += DrawPanel_Paint;
         }
         private void DrawPanel_Paint(object sender, PaintEventArgs e)
         {
             // Draw shapes onto the panel when it is painted
-            e.Graphics.DrawImageUnscaled(drawBitmap, Point.Empty);
-
+            e.Graphics.DrawImageUnscaled(flashingBitmap, Point.Empty);
+            
             pen.Draw(penColor, e.Graphics, penX, penY);
         }
 
@@ -58,8 +60,8 @@ namespace SE4
             flashing = false;
             if (flashingThread.IsAlive)
             {
-                flashingThread.Join();
-                this.Clear();
+                //test this out
+                flashingThread.Abort();
             }
         }
 
@@ -68,12 +70,23 @@ namespace SE4
             int index = 0;
             while (flashing)
             {
-                drawPanel.Invoke(new Action(() => drawPanel.BackColor = flashingColours[index]));
+                using (Graphics g = Graphics.FromImage(flashingBitmap))
+                {
+                    g.Clear(SystemColors.ButtonShadow);
+                    foreach (var shape in shapes)
+                    {
+                        shape.SetColour(flashingColours[index]);
+                        shape.draw(g);
+                    }
+                }
+
+                drawPanel.Invoke(new Action(() => drawPanel.Refresh()));
 
                 index = (index + 1) % flashingColours.Length;
                 Thread.Sleep(flashingInterval);
             }
         }
+
         public void Clear()
         {
             shapes.Clear();
@@ -81,6 +94,11 @@ namespace SE4
             using (Graphics graphics = Graphics.FromImage(drawBitmap))
             {
                 graphics.Clear(SystemColors.ButtonShadow);
+            }
+
+            using (Graphics g = Graphics.FromImage(flashingBitmap))
+            {
+                g.Clear(SystemColors.ButtonShadow);
             }
 
             PanelUtilities.ClearErrorMessages();
@@ -94,7 +112,7 @@ namespace SE4
             penX = x;
             penY = y;
             drawPanel.Refresh();
-            this.SetPenColour(Color.Black);
+            SetPenColour(Color.Black);
         }
 
         public void MovePen(int x, int y)
@@ -129,6 +147,15 @@ namespace SE4
         {
             using (Graphics graphics = Graphics.FromImage(drawBitmap))
             {
+                foreach (var shape in shapes)
+                {
+                    shape.draw(graphics);
+                }
+            }
+
+            using (Graphics graphics = Graphics.FromImage(flashingBitmap))
+            {
+                graphics.Clear(SystemColors.ButtonShadow);
                 foreach (var shape in shapes)
                 {
                     shape.draw(graphics);

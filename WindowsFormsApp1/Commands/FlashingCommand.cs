@@ -36,7 +36,7 @@ namespace SE4.Commands
         private Color[] ExtractColors(string combinedColours)
         {
             List<Color> colours = new List<Color>();
-
+            // count = 0
             foreach (var entry in colorMap)
             {
                 if (combinedColours.Contains(entry.Key))
@@ -44,10 +44,13 @@ namespace SE4.Commands
                     colours.Add(entry.Value);
                     combinedColours = combinedColours.Replace(entry.Key, "");
                 }
-                else
-                {
-                    throw new CommandException("Invalid value passed, please pass a valid colour");
-                }
+                // count++ till hit 2
+                //if count == 2 return;
+            }
+
+            if (combinedColours.Trim().Length > 0)
+            {
+                throw new CommandException("Invalid value passed, please pass a valid color");
             }
 
             return colours.ToArray();

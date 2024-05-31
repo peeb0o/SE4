@@ -8,14 +8,28 @@ using System.Threading.Tasks;
 
 namespace SE4.Commands
 {
+    /// <summary>
+    /// Class for parsing moveto command passed from CommandParser class
+    /// </summary>
     public class MoveToCommand : Command
     {
         private VariableManager variableManager;
+
+        /// <summary>
+        /// Initialises instance of MoveToCommand class 
+        /// </summary>
+        /// <param name="variableManager"> Instance used to manage variables, used to check value of coordinates passed to see if they are literals or variables. </param>
         public MoveToCommand(VariableManager variableManager)
         {
             this.variableManager = variableManager;
         }
 
+        /// <summary>
+        /// Executes the moveto command using the parameters passed.
+        /// </summary>
+        /// <param name="shapeFactory"> Instance used to move the pen to the desired coordinates. </param>
+        /// <param name="parameters"> A string array containing the command parameters. Second element being the coordinates for the pen to move to. </param>
+        /// <param name="syntaxCheck"> Boolean value indicating whether the program is in syntax check mode or not. If yes then the move operation is not carried out. </param>
         public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
             if (parameters.Length != 2)
@@ -45,11 +59,17 @@ namespace SE4.Commands
 
         }
 
+        /// <summary>
+        /// Method for checking whether the coordinate value passed is a literal value or a variable.
+        /// </summary>
+        /// <param name="coordinate"></param>
+        /// <returns></returns>
         private int GetCoordinateValue(string coordinate)
         {
             //Check if variable
             if (variableManager.VariableExists(coordinate))
             {
+                //Return variable value
                 return variableManager.GetVariableValue(coordinate);
             }
 

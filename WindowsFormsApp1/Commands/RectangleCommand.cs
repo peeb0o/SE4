@@ -9,16 +9,29 @@ using System.Threading.Tasks;
 
 namespace SE4
 {
+    /// <summary>
+    /// Class for parsing rectangle draw commands passed from CommandParser class
+    /// </summary>
     public class RectangleCommand : Command
     {
         private Graphics graphics;
         private VariableManager variableManager;
 
+        /// <summary>
+        /// Initialises instance of RectangleCommand class 
+        /// </summary>
+        /// <param name="variableManager"> Instance used to manage variables, used to check value of dimension passed to see if it is a literal or variable. </param>
         public RectangleCommand(VariableManager variableManager)
         {
             this.variableManager = variableManager;
         }
 
+        /// <summary>
+        /// Executes the rectangle drawing command using the parameters passed.
+        /// </summary>
+        /// <param name="shapeFactory"> Instance used to draw the shape. </param>
+        /// <param name="parameters"> A string array containing the command parameters. Second element being the width and height of the rectangle to be drawn. </param>
+        /// <param name="syntaxCheck"> Boolean value indicating whether the program is in syntax check mode or not. If yes then the drawing operation is not carried out. </param>
         public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
             graphics = shapeFactory.drawPanel.CreateGraphics();
@@ -55,6 +68,12 @@ namespace SE4
             shapeFactory.AddShape(rect);
         }
 
+        /// <summary>
+        /// Method which checks to see if the dimension value passed is either a literal or a variable. 
+        /// This allows rectangles to be drawn using variable names rather than a literal integer. 
+        /// </summary>
+        /// <param name="dimension"> The string to be checked for either a literal or variable value. </param>
+        /// <returns> Returns the integer value of the dimension string checked. </returns>
         private int GetDimensionValue(string dimension)
         {
             //Check if variable

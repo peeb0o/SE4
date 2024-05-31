@@ -10,15 +10,29 @@ using System.Threading.Tasks;
 
 namespace SE4.Service
 {
+    /// <summary>
+    /// Class for parsing variable command from CommandParser
+    /// </summary>
     public class VariableCommand : Command
     {
         private VariableManager variableManager;
-        
+
+        /// <summary>
+        /// Initialises instance of CircleCommand class 
+        /// </summary>
+        /// <param name="variableManager"> Instance used to manage variables, used to manage the adding of new variables and also checking for existing variables. </param>
         public VariableCommand(VariableManager variableManager)
         {
             this.variableManager = variableManager;
         }
 
+        /// <summary>
+        /// Executes the processing of variables using the paramets passed. 
+        /// This method passes the params to the ProcessVarCommand which handles the logic.
+        /// </summary>
+        /// <param name="shapeFactory"> Instance used to manage drawing of shapes. </param>
+        /// <param name="parameters"> A string array of the command parameters to be parsed. </param>
+        /// <param name="syntaxCheck"> Boolean value indicating whether the program is in syntax check mode or not. If yes then the drawing operation is not carried out. </param>
         public override void Execute(ShapeFactory shapeFactory, string[] parameters, bool syntaxCheck)
         {
             try
@@ -35,6 +49,15 @@ namespace SE4.Service
             }
         }
 
+        /// <summary>
+        /// Method for processing the command passed and validating before passing values to ProcessCommands method.
+        /// Method checks to see if a value has been assigned or not in the command and sets to 0 by default if no value is explicitly set.
+        /// Variable name is checked to see if it already exists and an exception is thrown if so and 
+        /// variable name is checked against regex using the VariableValidation class to see if it has a valid name.
+        /// </summary>
+        /// <param name="shapefactory"> Instance used to manage drawing of shapes.</param>
+        /// <param name="parameters"> A string array of the command parameters to be parsed. </param>
+        /// <param name="syntaxCheck"> Boolean value indicating whether the program is in syntax check mode or not. If yes then the drawing operation is not carried out. </param>
         private void ProcessVarCommand(ShapeFactory shapefactory, string[] parameters, bool syntaxCheck)
         {
             try
@@ -97,6 +120,12 @@ namespace SE4.Service
             }
         }
 
+        /// <summary>
+        /// Method for processing the variable name and value once the values have been validated. 
+        /// </summary>
+        /// <param name="variableName"> String for the variable name to be added to the variable manager. </param>
+        /// <param name="variableValue"> Integer holding value of the variable to be added to variable manager. </param>
+        /// <param name="syntaxCheck"> Boolean checking if program was run in syntax check mode and not executing if so. </param>
         public void ProcessCommands(string variableName, int variableValue, bool syntaxCheck)
         {
             if(!syntaxCheck)

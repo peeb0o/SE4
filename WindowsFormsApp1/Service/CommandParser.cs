@@ -13,6 +13,9 @@ using System.Windows.Forms;
 
 namespace SE4
 {
+    /// <summary>
+    /// Parses and executes commands input by user
+    /// </summary>
     public class CommandParser
     {
         private ShapeFactory shapeFactory;
@@ -39,6 +42,12 @@ namespace SE4
         private int lineNumber;
         public bool syntaxCheck { get; set; } = false;
 
+        /// <summary>
+        /// Initialises an instance of command parser class
+        /// </summary>
+        /// <param name="factory"> Instance which is used to manage the drawing of shapes onto the panel. </param>
+        /// <param name="variableManager"> Instance used to manage variables delcared. </param>
+        /// <param name="lineNumber"> Current line number of a command being parsed - used for error reporting. </param>
         public CommandParser(ShapeFactory factory, VariableManager variableManager, int lineNumber)
         {
             this.lineNumber = lineNumber;
@@ -61,6 +70,12 @@ namespace SE4
             ifCommands = new List<string>();
         }
 
+        /// <summary>
+        /// Parses command from either single line command box or multiline command box
+        /// Checks if in loop or if statement then looks for operation for variable declaration before entering main switch statement
+        /// </summary>
+        /// <param name="command"> The command which is passed from either textbox to be parsed. </param>
+        /// <param name="lineNumber"> Linenumber of command currently being parsed, used for reporting errors. </param>
         public void ParseCommand(string command, int lineNumber)
         {
             //split command
@@ -69,12 +84,13 @@ namespace SE4
             //Will parse command based on the first part that is read 
             string commandType = parts[0].ToLower().Trim();
 
-
+            //Are we in a loop
             if (isInLoop)
             {
+                //If end loop then execute contents until condition is met
                 if (command.Trim().ToLower() == "endloop")
                 {
-                    // Execute the loop
+                    // Execute the loop 
                     ExecuteLoop(lineNumber);
                     isInLoop = false;
                     return;
@@ -84,9 +100,9 @@ namespace SE4
                     // Collect loop commands
                     loopCommands.Add(command);
                 }
-                
             }
 
+            //Single line if statement
             if (isInIf && command.Trim().ToLower() != "endif")
             {
                 isInIf = false;
@@ -94,14 +110,18 @@ namespace SE4
 
                 return;
             }
+            //If block
             else if(isInIf && command.Trim().ToLower() == "endif")
             {
                 isInIf = false;
 
+                //Evaluate the condition of the if 
                 if (EvaluateCondition(ifCondition))
                 {
+                    //Loop through each command in if block
                     foreach (var cmd in ifCommands)
                     {
+                        //parse
                         this.ParseCommand(cmd, lineNumber);
                     }
 
@@ -109,16 +129,14 @@ namespace SE4
                 }
             }
 
-            //parse commands using if statements
-
-            //Check if command is trying an operation
             try
             {
-
+                //Check if command is trying an operation
                 if (command.ToLower().Contains('+') || command.ToLower().Contains('-'))
                 {
                     try
                     {
+                        //Handle variable arithmetic operation
                         if (operatorHandler.HandleArithmeticOperators(command))
                         {
                             return;
@@ -186,12 +204,15 @@ namespace SE4
             }
             catch (Exception ex)
             {
-                /*PanelUtilities.AddErrorMessage(ex.Message, lineNumber);
-                PanelUtilities.WriteToPanel(shapeFactory.drawPanel);*/
+                //Throw to top layer
                 throw ex;
             }
         }
 
+        /// <summary>
+        /// Method for handling default case in the switch statement. Should always be a variable declaration otherwise invalid command passed.
+        /// </summary>
+        /// <param name="command"> Command to be checked, should be a variable declared without var keyword. </param>
         private void HandleDefaultCase(string command)
         {
             if (command.Contains("="))
@@ -231,18 +252,25 @@ namespace SE4
             }
         }
 
+        /// <summary>
+        /// Method which executes the commands collected in the loop block passed by user
+        /// Will continue to loop through the commands in the loop block until the EvaluateCondition method returns false
+        /// </summary>
+        /// <param name="lineNumber"> Needed as we are calling ParseCommand method which takes linenumber as a a param. </param>
         private void ExecuteLoop(int lineNumber)
         {
-            List<string> loopCommandsCopy = new List<string>(loopCommands); // Create a copy of loopCommands (needed or invalid operation exception for iterating over original)
+            // Create a copy of loopCommands (needed or invalid operation exception for iterating over original as original continues to collect commands while looping back through)
+            List<string> loopCommandsCopy = new List<string>(loopCommands); 
 
+            //While condition is met keep looping through 
             while (EvaluateCondition(loopCondition))
             {
                 foreach (var cmd in loopCommandsCopy)
                 {
-                    Console.WriteLine($"Executing command: {cmd}"); // Debugging statement
+                    Console.WriteLine($"Executing command: {cmd}"); // Debugging statement remove later
                     ParseCommand(cmd, lineNumber);
                 }
-                // Re-evaluate the loop condition after executing commands
+                // Re-evaluate the loop condition after executing commands once condition is false break and endloop
                 if (!EvaluateCondition(loopCondition))
                 {
                     break;
@@ -250,6 +278,11 @@ namespace SE4
             }
         }
 
+        /// <summary>
+        /// Method for checking the condition and then returns true or false for if the condition is met.
+        /// </summary>
+        /// <param name="condition"> The string for which the evaluation is checked against. </param>
+        /// <returns> If the condition evaluation is true then returns true otherwise false. </returns>
         private bool EvaluateCondition(string condition)
         {
             if (condition.Contains("==") || condition.Contains("!="))

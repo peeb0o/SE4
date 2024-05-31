@@ -27,8 +27,6 @@ namespace SE4
             }
 
             //Check if parameter sent is either off or on and set fill value accordingly, otherwise throw an exception
-            string option = parameters[1];
-
             if (parameters[1].ToLower() == "on" && !syntaxCheck)
             {
                 shapeFactory.SetFillValue(true);
@@ -37,10 +35,12 @@ namespace SE4
             {
                 shapeFactory.SetFillValue(false);
             }
-            else if (parameters[1] != "on" || parameters[1] != "off")
+            else if (parameters[1] != "on" || parameters[1] != "off" && !syntaxCheck)
             {
                 throw new CommandException($"Invalid value {parameters[1]} passed. Syntax: fill <on/off>.");
             }
+            else if(syntaxCheck)
+                return;
         }
     }
 }

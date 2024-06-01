@@ -43,7 +43,7 @@ namespace SE4
         public bool fill { get; private set; } = false;
         private Thread flashingThread;
         private bool flashing;
-        private Color[] flashingColours;
+        public Color[] flashingColours { get; private set; } // for testing
         private int flashingInterval = 500; //half a second per flash
 
         /// <summary>

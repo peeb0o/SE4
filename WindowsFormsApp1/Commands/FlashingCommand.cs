@@ -53,8 +53,9 @@ namespace SE4.Commands
         private Color[] ExtractColors(string combinedColours)
         {
             List<Color> colours = new List<Color>();
-            // count = 0
+            
             //Loop through dictionary
+            int maxColourCount = 3;
             foreach (var entry in colourMap)
             {
                 //Check for matches and replace string with empty string 
@@ -64,8 +65,11 @@ namespace SE4.Commands
                     colours.Add(entry.Value);
                     combinedColours = combinedColours.Replace(entry.Key, "");
                 }
-                // count++ till hit 2
-                //if count == 2 return;
+                
+                if(colours.Count.Equals(maxColourCount))
+                {
+                    throw new InvalidParameterCountException("Too many colours passed. Syntax: flash <color1color2>");
+                }
             }
 
             if (combinedColours.Trim().Length > 0)

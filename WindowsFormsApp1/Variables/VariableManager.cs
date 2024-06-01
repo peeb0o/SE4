@@ -86,7 +86,7 @@ namespace SE4.Variables
             {
                 return variable.value;
             }
-
+            
             return 0;
         }
 

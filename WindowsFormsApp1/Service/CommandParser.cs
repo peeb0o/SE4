@@ -40,6 +40,9 @@ namespace SE4
         private bool isInIf = false;
         private string ifCondition;
         private int lineNumber;
+        /// <summary>
+        /// Gets or sets a value which indicates whethere or not the program is running in syntax mode where drawing is disabled.
+        /// </summary>
         public bool syntaxCheck { get; set; } = false;
 
         /// <summary>

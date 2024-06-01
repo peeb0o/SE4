@@ -8,17 +8,34 @@ using System.Threading.Tasks;
 
 namespace SE4.Service
 {
+    /// <summary>
+    /// Class which handles arithmetic operations, specifically addition and subtraction
+    /// </summary>
     public class ArithmeticOperatorHandler
     {
         private VariableManager variableManager;
         private ShapeFactory shapeFactory;
 
+        /// <summary>
+        /// Initialises an instance of the ArithmeticOperatorHandler class
+        /// </summary>
+        /// <param name="variableManager"> Instance used to manage variables. In this case to be able to handle variables as part of the arithmetic operation. </param>
+        /// <param name="shapeFactory"> Instance used to handle drawing of shapes. </param>
         public ArithmeticOperatorHandler(VariableManager variableManager, ShapeFactory shapeFactory)
         {
             this.variableManager = variableManager;
             this.shapeFactory = shapeFactory;
         }
 
+        /// <summary>
+        /// Method which performs the arithmetic operation based on the command passed.
+        /// Command is split on the equals and using an index the operator is found and 
+        /// left and right operands are checked. Values are checked to see if they are
+        /// variables or literals before actually performing the operation. 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns> Returns a boolean value of true if operation was carried out or an exception is thrown if failed explicitly. Different to other operator handlers as they can
+        /// return either true or false but integers can't explicitly be false as a return type. </returns>
         public bool HandleArithmeticOperators(string command)
         {
             try
@@ -107,6 +124,13 @@ namespace SE4.Service
             }
         }
 
+        /// <summary>
+        /// Method which removes the var keyword from the beginning of the command if present. 
+        /// This allows for the handler to work for variable declarations with and without
+        /// the var keyword. 
+        /// </summary>
+        /// <param name="variableNameWithVar"></param>
+        /// <returns> Returns a string which either removed the var keyword or left it as it was. </returns>
         private string RemoveVarKeyword(string variableNameWithVar)
         {
             // Check if the variable name starts with "var"

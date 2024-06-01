@@ -105,31 +105,57 @@ namespace SE4
                 }
             }
 
-            //Single line if statement
-            if (isInIf && command.Trim().ToLower() != "endif")
+            //Single line if statement has more arguments than ifblock
+            if (parts[0].ToLower() == "if" && parts.Length > 4)
             {
-                isInIf = false;
-                this.ParseCommand(command, lineNumber);
+                //Find end of condition index
+                int conditionEndIndex = command.IndexOf(' ', 5);
+                //Separate condition and the command to be executed
+                string condition = command.Substring(3, conditionEndIndex).Trim();
+                string commandToExecute = command.Substring(conditionEndIndex + 4).Trim();
 
+                //Check condition and then execute
+                if (EvaluateCondition(condition))
+                {
+                    this.ParseCommand(commandToExecute, lineNumber);
+                }
                 return;
             }
-            //If block
-            else if(isInIf && command.Trim().ToLower() == "endif")
-            {
-                isInIf = false;
 
-                //Evaluate the condition of the if 
-                if (EvaluateCondition(ifCondition))
+            //If block statement 
+            if (isInIf)
+            {
+                // Endif then execute each command in block
+                if (command.Trim().ToLower() == "endif")
                 {
-                    //Loop through each command in if block
-                    foreach (var cmd in ifCommands)
+                    isInIf = false;
+
+                    if (EvaluateCondition(ifCondition))
                     {
-                        //parse
-                        this.ParseCommand(cmd, lineNumber);
+                        foreach (var cmd in ifCommands)
+                        {
+                            this.ParseCommand(cmd, lineNumber);
+                        }
                     }
 
+                    ifCommands.Clear();
                     return;
                 }
+                else
+                {
+                    //Add commands to be executed in block
+                    ifCommands.Add(command);
+                    return;
+                }
+            }
+
+            //Entering if block set if flag to true 
+            if (command.ToLower().StartsWith("if "))
+            {
+                ifCondition = command.Substring(command.IndexOf(' ') + 1).Trim();
+                isInIf = true;
+                ifCommands.Clear();
+                return;
             }
 
             try
@@ -151,6 +177,8 @@ namespace SE4
                     }
                 }
 
+                var commandParts = command.Split(new[] { ' ' }, 2);
+
                 //Check command type, default allows for variables to be declared without var keyword
                 switch (commandType)
                 {
@@ -164,11 +192,6 @@ namespace SE4
                         loopCondition = command.Substring(command.IndexOf(' ') + 1).Trim();
                         isInLoop = true;
                         loopCommands.Clear();
-                        break;
-                    case "if":
-                        ifCondition = command.Substring(command.IndexOf(' ') + 1).Trim();
-                        isInIf = true;
-                        ifCommands.Clear();
                         break;
                     case "var":
                         variableCommand.Execute(shapeFactory, parts, syntaxCheck);

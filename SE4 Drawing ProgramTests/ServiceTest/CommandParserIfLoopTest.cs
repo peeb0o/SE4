@@ -58,6 +58,51 @@ namespace SE4_Drawing_ProgramTests.ServiceTest
         }
 
         /// <summary>
+        /// Test ensuring if commands work as single line if command
+        /// </summary>
+        [TestMethod]
+        public void Execute_IfConditionSuccess_SingleLineIfLongerVariableName()
+        {
+            //Setup
+            variableManager.AddVariable("radius", 10);
+            string[] commands = {
+                "if radius == 10 circle radius"
+            };
+
+            //Act
+            foreach (var cmd in commands)
+            {
+                commandParser.ParseCommand(cmd, 0);
+            }
+
+            //Assert
+            Assert.AreEqual(1, shapeFactory.shapes.Count);
+            Assert.IsTrue(shapeFactory.shapes[0] is Circle);
+        }
+
+        /// <summary>
+        /// Test ensuring if commands work as single line if command without variables
+        /// </summary>
+        [TestMethod]
+        public void Execute_IfConditionSuccess_SingleLineIfNoVariable()
+        {
+            //Setup
+            string[] commands = {
+                "if 10 == 10 circle 10"
+            };
+
+            //Act
+            foreach (var cmd in commands)
+            {
+                commandParser.ParseCommand(cmd, 0);
+            }
+
+            //Assert
+            Assert.AreEqual(1, shapeFactory.shapes.Count);
+            Assert.IsTrue(shapeFactory.shapes[0] is Circle);
+        }
+
+        /// <summary>
         /// Test ensuring a valid if block can be executed
         /// </summary>
         [TestMethod]
@@ -166,6 +211,37 @@ namespace SE4_Drawing_ProgramTests.ServiceTest
             Assert.IsTrue(shapeFactory.shapes[0] is Circle);
             Assert.IsTrue(shapeFactory.shapes[1] is Circle);
             Assert.IsTrue(shapeFactory.shapes[2] is Circle);
+        }
+
+        /// <summary>
+        /// Test ensuring loopblock executes as intended
+        /// </summary>
+        [TestMethod]
+        public void Execute_LoopCommand_WhileLoop()
+        {
+            //Setup
+            variableManager.AddVariable("x", 10);
+            string[] commands = {
+                "count = 1",
+                "loop count != 5",
+                "circle 20",
+                "count = count + 1",
+                "endloop"
+            };
+
+            // Act
+            foreach (var cmd in commands)
+            {
+                commandParser.ParseCommand(cmd, 0);
+            }
+
+            // Assert
+            Assert.AreEqual(4, shapeFactory.shapes.Count);
+            Assert.IsTrue(shapeFactory.shapes[0] is Circle);
+            Assert.IsTrue(shapeFactory.shapes[1] is Circle);
+            Assert.IsTrue(shapeFactory.shapes[2] is Circle);
+            Assert.IsTrue(shapeFactory.shapes[3] is Circle);
+            
         }
     }
 }

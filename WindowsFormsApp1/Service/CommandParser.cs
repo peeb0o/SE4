@@ -105,14 +105,24 @@ namespace SE4
                 }
             }
 
+            // Array of possible operators
+            string[] operators = { "==", "!=", "<", ">", "<=", ">=" };
+
             //Single line if statement has more arguments than ifblock
             if (parts[0].ToLower() == "if" && parts.Length > 4)
             {
-                //Find end of condition index
-                int conditionEndIndex = command.IndexOf(' ', 5);
+                //Find index of operator to find end of condition index pos
+                int conditionEndIndex = -1;
+                foreach (string op in operators)
+                {
+                    conditionEndIndex = command.IndexOf(op) + 2;
+                    if (conditionEndIndex >= 0)
+                        break;
+                }
+
                 //Separate condition and the command to be executed
                 string condition = command.Substring(3, conditionEndIndex).Trim();
-                string commandToExecute = command.Substring(conditionEndIndex + 4).Trim();
+                string commandToExecute = command.Substring(conditionEndIndex + 3).Trim();
 
                 //Check condition and then execute
                 if (EvaluateCondition(condition))

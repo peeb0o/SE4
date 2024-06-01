@@ -20,6 +20,9 @@ namespace SE4
         private VariableManager variableManager;
         private int lineNumber = 1;
         
+        /// <summary>
+        /// Initialises an instance of the Form1 class
+        /// </summary>
         public Form1()
         {
             InitializeComponent();

@@ -12,6 +12,9 @@ using System.Windows.Forms;
 
 namespace SE4_Drawing_ProgramTests.CommandsTest
 {
+    /// <summary>
+    /// Class testing the FillCommand class.
+    /// </summary>
     [TestClass()]
     public class FillCommandTest
     {
@@ -21,6 +24,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
         private FillCommand fillCommand;
         private CircleCommand circleCommand;
 
+        /// <summary>
+        /// Method initialising the required classes for testing. 
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
@@ -31,6 +37,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             circleCommand = new CircleCommand(variableManager);
         }
 
+        /// <summary>
+        /// Test ensuring the fill command works by drawing a filled circle. 
+        /// </summary>
         [TestMethod]
         public void Execute_FillCommand_SuccessOn()
         {
@@ -48,6 +57,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             Assert.AreEqual(true, circle.IsFilled());
         }
 
+        /// <summary>
+        /// Test ensuring the fill command works when set to off -> regular circle drawn. 
+        /// </summary>
         [TestMethod]
         public void Execute_FillCommand_SuccessOff()
         {
@@ -65,6 +77,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             Assert.AreEqual(false, circle.IsFilled());
         }
 
+        /// <summary>
+        /// Test ensuring that fill value doesn't change when command is passed in syntax mode. 
+        /// </summary>
         [TestMethod]
         public void Execute_FillCommand_Success_SyntacCheckTrue()
         {
@@ -78,6 +93,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             Assert.AreEqual(false, shapeFactory.GetFill());
         }
 
+        /// <summary>
+        /// Test ensuring parameter count exception is thrown when too few parameters passed. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidParameterCountException))]
         public void Execute_FillCommand_ThrowsException_InvalidParameterCount_TooFewParameters()
@@ -89,6 +107,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             fillCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Test ensuring command exception is thrown when invalid value passed. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(CommandException))]
         public void Execute_FillCommand_ThrowsException_InvalidCommand_Passed()
@@ -100,6 +121,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             fillCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Test ensuring command exception thrown when an empty string is passed. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(CommandException))]
         public void Execute_FillCommand_ThrowsException_InvalidCommand_PassedEmpty()
@@ -111,6 +135,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             fillCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Test ensuring command exception thrown when a blank space is passed. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(CommandException))]
         public void Execute_FillCommand_ThrowsException_InvalidCommand_PassedWhiteSpace()

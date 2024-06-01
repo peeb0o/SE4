@@ -12,6 +12,9 @@ using System.Drawing;
 
 namespace SE4_Drawing_ProgramTests.CommandsTest
 {
+    /// <summary>
+    /// Class testing the PenCommand class.
+    /// </summary>
     [TestClass()]
     public class PenCommandTest
     {
@@ -19,6 +22,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
         private Panel panel;
         private PenCommand penCommand;
 
+        /// <summary>
+        /// Initialises the classes needed for testing.
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
@@ -27,6 +33,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             penCommand = new PenCommand();
         }
 
+        /// <summary>
+        /// Test ensuring that the pen colour is set to red.
+        /// </summary>
         [TestMethod]
         public void Execute_PenSuccess_Red()
         {
@@ -40,6 +49,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             Assert.AreEqual(Color.Red, shapeFactory.GetPenColour());
         }
 
+        /// <summary>
+        /// Test ensuring that the pen colour remains the default black if command run in syntax check mode.
+        /// </summary>
         [TestMethod]
         public void Execute_PenSuccess_SyntaxCheck_PenDefaultColour()
         {
@@ -53,6 +65,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             Assert.AreEqual(Color.Black, shapeFactory.GetPenColour());
         }
 
+        /// <summary>
+        /// Test ensuring that the invalid colour exception is thrown if the colour passed is not known. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidColourException))]
         public void Execute_PenFail_UnknownColour()
@@ -64,6 +79,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             penCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Test ensuring the invalid colour exception is thrown if the colour passed is an empty string. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidColourException))]
         public void Execute_PenFail_UnknownColour_EmptyStringPassed()
@@ -75,6 +93,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             penCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Test ensuring the invalid colour exception is thrown if the colour passed is a blank string. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidColourException))]
         public void Execute_PenFail_UnknownColour_BlankSpacePassed()
@@ -86,6 +107,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             penCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Test ensuring the parameter count exception is thrown if too few parameters are passed. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidParameterCountException))]
         public void Execute_PenFail_NotEnoughParams()

@@ -116,7 +116,7 @@ namespace SE4
                     foreach (var shape in shapes)
                     {
                         shape.SetColour(flashingColours[index]);
-                        shape.draw(g);
+                        shape.Draw(g);
                     }
                 }
 
@@ -219,7 +219,7 @@ namespace SE4
             {
                 foreach (var shape in shapes)
                 {
-                    shape.draw(graphics);
+                    shape.Draw(graphics);
                 }
             }
 
@@ -228,7 +228,7 @@ namespace SE4
                 graphics.Clear(SystemColors.ButtonShadow);
                 foreach (var shape in shapes)
                 {
-                    shape.draw(graphics);
+                    shape.Draw(graphics);
                 }
             }
         }

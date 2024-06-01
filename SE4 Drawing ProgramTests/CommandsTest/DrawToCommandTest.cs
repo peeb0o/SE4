@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace SE4_Drawing_ProgramTests
 {
+    /// <summary>
+    /// Class for testing the DrawToCommand class.
+    /// </summary>
     [TestClass()]
     public class DrawToCommandTest
     {
@@ -19,6 +22,9 @@ namespace SE4_Drawing_ProgramTests
         private VariableManager variableManager;
         private DrawToCommand drawToCommand;
 
+        /// <summary>
+        /// Method initialising classes to be used for tests. 
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
@@ -28,6 +34,9 @@ namespace SE4_Drawing_ProgramTests
             drawToCommand = new DrawToCommand(variableManager);
         }
 
+        /// <summary>
+        /// Test ensuring that a line is drawn when a valid command is passed, using literal coordinates.
+        /// </summary>
         [TestMethod]
         public void Execute_LineSuccess_WithLiteralCoordinates()
         {
@@ -44,6 +53,9 @@ namespace SE4_Drawing_ProgramTests
             Assert.AreEqual(100, line.X);
         }
 
+        /// <summary>
+        /// Test ensuring the line is drawn using a variable for the X coordinate. 
+        /// </summary>
         [TestMethod]
         public void Execute_LineSuccess_WithVariableXCoordinate()
         {
@@ -61,6 +73,9 @@ namespace SE4_Drawing_ProgramTests
             Assert.AreEqual(100, line.X);
         }
 
+        /// <summary>
+        /// Test ensuring the line is drawn using a variable for the Y coordinate. 
+        /// </summary>
         [TestMethod]
         public void Execute_LineSuccess_WithVariableYCoordinate()
         {
@@ -78,6 +93,9 @@ namespace SE4_Drawing_ProgramTests
             Assert.AreEqual(200, line.Y);
         }
 
+        /// <summary>
+        /// Test ensuring a line is drawn using variables for both coordinates.
+        /// </summary>
         [TestMethod]
         public void Execute_LineSuccess_WithVariableCoordinates()
         {
@@ -97,6 +115,9 @@ namespace SE4_Drawing_ProgramTests
             Assert.AreEqual(200, line.Y);
         }
 
+        /// <summary>
+        /// Test ensuring no line is drawn when syntax mode is enabled.
+        /// </summary>
         [TestMethod]
         public void Execute_SyntaxCheck_Success()
         {
@@ -110,6 +131,9 @@ namespace SE4_Drawing_ProgramTests
             Assert.AreEqual(0, shapeFactory.shapes.Count);
         }
 
+        /// <summary>
+        /// Test ensuring parameter count exception is thrown when too few parameters are passed. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidParameterCountException))]
         public void Execute_ThrowsException_InvalidParameterCountException_NoCoordinatesPassed()
@@ -121,6 +145,9 @@ namespace SE4_Drawing_ProgramTests
             drawToCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Test ensuring parameter count exception is thrown when too few coordinates are passed. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidParameterCountException))]
         public void Execute_ThrowsException_InvalidParameterCountException_TooFewCoordinatesPassed()
@@ -132,6 +159,9 @@ namespace SE4_Drawing_ProgramTests
             drawToCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Test ensuring parameter count exception is thrown when empty string is passed as second coordinate. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidParameterCountException))]
         public void Execute_ThrowsException_InvalidParameterCountException_EmptyStringAsCoordinatePassed()
@@ -143,6 +173,9 @@ namespace SE4_Drawing_ProgramTests
             drawToCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Test ensuring parameter count exception is thrown when blank space is passed as second coordinate. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidParameterCountException))]
         public void Execute_ThrowsException_InvalidParameterCountException_WhiteSpaceAsCoordinatePassed()
@@ -154,7 +187,9 @@ namespace SE4_Drawing_ProgramTests
             drawToCommand.Execute(shapeFactory, parameters, false);
         }
 
-
+        /// <summary>
+        /// Test ensuring command exception is thrown when invalid coordinates are passed.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(CommandException))]
         public void Execute_ThrowsException_CommandException()

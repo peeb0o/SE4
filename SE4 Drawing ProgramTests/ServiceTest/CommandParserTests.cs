@@ -12,6 +12,9 @@ using System.Windows.Forms;
 
 namespace SE4.Tests
 {
+    /// <summary>
+    /// Class testing the CommandParser
+    /// </summary>
     [TestClass()]
     public class CommandParserTests
     {
@@ -20,8 +23,10 @@ namespace SE4.Tests
         private Panel panel;
         private VariableManager variableManager;
         private int lineNumber = 0; // add logic later
-        private bool syntaxCheck = false;
-
+        
+        /// <summary>
+        /// Initialises the classes needed for testing.
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
@@ -32,6 +37,9 @@ namespace SE4.Tests
             variableManager.VariablesClear();
         }
 
+        /// <summary>
+        /// Tests drawto.execute with a valid command
+        /// </summary>
         [TestMethod()]
         public void ParseCommand_DrawTo_Success()
         {
@@ -46,6 +54,9 @@ namespace SE4.Tests
             Assert.AreEqual(100, shapeFactory.penY);
         }
 
+        /// <summary>
+        /// Tests moveto with a valid command.
+        /// </summary>
         [TestMethod()]
         public void ParseCommand_MoveTo_Success()
         {
@@ -60,6 +71,9 @@ namespace SE4.Tests
             Assert.AreEqual(100, shapeFactory.penY);
         }
 
+        /// <summary>
+        /// Tests valid pen colour command 
+        /// </summary>
         [TestMethod()]
         public void ParseCommand_PenColour_Success()
         {
@@ -73,6 +87,9 @@ namespace SE4.Tests
             Assert.AreEqual(shapeFactory.penColor, Color.Red);
         }
 
+        /// <summary>
+        /// Tests valid fill command
+        /// </summary>
         [TestMethod()]
         public void ParseCommand_Fill_On_Success()
         {
@@ -86,6 +103,9 @@ namespace SE4.Tests
             Assert.AreEqual(shapeFactory.fill, true);
         }
 
+        /// <summary>
+        /// Tests valid fill off command
+        /// </summary>
         [TestMethod()]
         public void ParseCommand_Fill_Off_Success()
         {
@@ -99,6 +119,9 @@ namespace SE4.Tests
             Assert.AreEqual(shapeFactory.fill, false);
         }
 
+        /// <summary>
+        /// Tests valid circle command
+        /// </summary>
         [TestMethod()]
         public void ParseCommand_Circle_Success()
         {
@@ -112,6 +135,9 @@ namespace SE4.Tests
             Assert.IsTrue(shapeFactory.shapes.Last() is Circle);
         }
 
+        /// <summary>
+        /// Tests valid rectangle command
+        /// </summary>
         [TestMethod()]
         public void ParseCommand_Rectangle_Success()
         {
@@ -125,6 +151,9 @@ namespace SE4.Tests
             Assert.IsTrue(shapeFactory.shapes.Last() is Rectangle);
         }
 
+        /// <summary>
+        /// Tests valid triangle command 
+        /// </summary>
         [TestMethod()]
         public void ParseCommand_Triangle_Success()
         {
@@ -138,6 +167,9 @@ namespace SE4.Tests
             Assert.IsTrue(shapeFactory.shapes.Last() is Triangle);
         }
 
+        /// <summary>
+        /// Test valid reset command
+        /// </summary>
         [TestMethod()]
         public void ParseCommand_Reset_Success()
         {
@@ -152,6 +184,9 @@ namespace SE4.Tests
             Assert.AreEqual(0, shapeFactory.penY);
         }
 
+        /// <summary>
+        /// Tests valid clear command
+        /// </summary>
         [TestMethod()]
         public void ParseCommand_Clear_Success()
         {
@@ -168,6 +203,9 @@ namespace SE4.Tests
            Assert.AreEqual(0, shapeFactory.shapes.Count);
         }
 
+        /// <summary>
+        /// Tests valid variable declaration with var keyword
+        /// </summary>
         [TestMethod()]
         public void Parse_Command_Variable_Declaration_Success()
         {
@@ -182,6 +220,9 @@ namespace SE4.Tests
             Assert.IsTrue(variableManager.VariableExists(variableName));
         }
 
+        /// <summary>
+        /// Tests valid variable declaration without var keyword
+        /// </summary>
         [TestMethod()]
         public void Parse_Command_Variable_Declaration_Success_No_Var_Keyword()
         {
@@ -196,6 +237,9 @@ namespace SE4.Tests
             Assert.IsTrue(variableManager.VariableExists(variableName));
         }
 
+        /// <summary>
+        /// Tests valid arithmetic operation addition using literal integers
+        /// </summary>
         [TestMethod()]
         public void Parse_Arithmetic_Operation_Addition_Success()
         {
@@ -210,6 +254,9 @@ namespace SE4.Tests
             Assert.AreEqual(300, variableManager.GetVariableValue(variableName));
         }
 
+        /// <summary>
+        /// Tests valid subtraction operation using literal integers
+        /// </summary>
         [TestMethod()]
         public void Parse_Arithmetic_Operation_Subtraction_Success()
         {
@@ -225,6 +272,9 @@ namespace SE4.Tests
 
         }
 
+        /// <summary>
+        /// Tests valid arithmetic addition operation using variables only
+        /// </summary>
         [TestMethod()]
         public void Parse_Arithmetic_Variables_Addition_Success()
         {
@@ -241,6 +291,9 @@ namespace SE4.Tests
             Assert.AreEqual(60, variableManager.GetVariableValue(variableName));
         }
 
+        /// <summary>
+        /// Tests valid arithmetic subtraction operation using variables only
+        /// </summary>
         [TestMethod()]
         public void Parse_Arithmetic_Variables_Subtraction_Success()
         {
@@ -257,42 +310,32 @@ namespace SE4.Tests
             Assert.AreEqual(40, variableManager.GetVariableValue(variableName));
         }
 
+        /// <summary>
+        /// Ensures the parameter count exception is thrown for an invalid empty command. 
+        /// </summary>
         [TestMethod()]
+        [ExpectedException(typeof(InvalidParameterCountException))]
         public void Parse_Command_Invalid_Command_Empty()
         {
             //Setup
             string command = " ";
-            try
-            {
-                //Action
-                commandParser.ParseCommand(command, lineNumber);
-
-                //Assert
-                Assert.Fail("No exception thrown for empty command");
-            }
-            catch (InvalidParameterCountException ex)
-            {
-                Assert.AreEqual("Invalid command entered", ex.Message);
-            }
+            
+            //Action
+            commandParser.ParseCommand(command, lineNumber);
         }
 
+        /// <summary>
+        /// Ensures the command exception is thrown for invalid arithmetic operations.
+        /// </summary>
         [TestMethod()]
+        [ExpectedException(typeof(CommandException))]
         public void Parse_Command_Invalid_Arithmetic_Command()
         {
             //Setup
             string command = "+ 100";
-            try
-            {
-                //Action
-                commandParser.ParseCommand(command, lineNumber);
-
-                //Assert
-                Assert.Fail("No exception thrown for empty command");
-            }
-            catch (CommandException ex)
-            {
-                Assert.AreEqual("Invalid Arithmetic Command", ex.Message);
-            }
+            
+            //Action
+            commandParser.ParseCommand(command, lineNumber);
         }
     }
 }

@@ -11,6 +11,9 @@ using SE4.Variables;
 
 namespace SE4_Drawing_ProgramTests
 {
+    /// <summary>
+    /// Class for testing the CircleCommand class.
+    /// </summary>
     [TestClass()]
     public class CircleCommandTest
     {
@@ -19,6 +22,9 @@ namespace SE4_Drawing_ProgramTests
         private VariableManager variableManager;
         private CircleCommand circleCommand;
         
+        /// <summary>
+        /// Setup method which initialises the required classes. 
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
@@ -28,6 +34,9 @@ namespace SE4_Drawing_ProgramTests
             circleCommand = new CircleCommand(variableManager);
         }
 
+        /// <summary>
+        /// Tests circle command with literal radius.
+        /// </summary>
         [TestMethod]
         public void Execute_CircleSuccess_WithLiteralRadius()
         {
@@ -44,6 +53,9 @@ namespace SE4_Drawing_ProgramTests
             Assert.AreEqual(50, circle.radius);
         }
 
+        /// <summary>
+        /// Tests circle command with a variable passed as the radius. 
+        /// </summary>
         [TestMethod]
         public void Execute_CircleSuccess_WithVariableRadius()
         {
@@ -61,6 +73,9 @@ namespace SE4_Drawing_ProgramTests
             Assert.AreEqual(100, circle.radius);
         }
 
+        /// <summary>
+        /// Test checking circle isn't drawn when syntax mode is true. 
+        /// </summary>
         [TestMethod]
         public void Execute_SyntaxCheck_Success()
         {
@@ -74,6 +89,9 @@ namespace SE4_Drawing_ProgramTests
             Assert.AreEqual(0, shapeFactory.shapes.Count);
         }
 
+        /// <summary>
+        /// Test ensuring the parameter count exception is thrown when too few parameters are passed. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidParameterCountException))]
         public void Execute_ThrowsException_InvalidParameterCountException()
@@ -85,6 +103,9 @@ namespace SE4_Drawing_ProgramTests
             circleCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Test ensuring command exception is thrown when an invalid radius is passed.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(CommandException))]
         public void Execute_ThrowsException_CommandException()

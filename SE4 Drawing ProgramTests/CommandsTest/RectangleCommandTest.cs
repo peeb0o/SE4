@@ -11,6 +11,9 @@ using SE4.Variables;
 
 namespace SE4_Drawing_ProgramTests.CommandsTest
 {
+    /// <summary>
+    /// Class testing the RectangleCommand class.
+    /// </summary>
     [TestClass()]
     public class RectangleCommandTest
     {
@@ -19,6 +22,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
         private VariableManager variableManager;
         private RectangleCommand rectangleCommand;
 
+        /// <summary>
+        /// Initialises the classes needed for testing. 
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
@@ -28,6 +34,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             rectangleCommand = new RectangleCommand(variableManager);
         }
 
+        /// <summary>
+        /// Test method ensuring a rectangle is drawn using literal values for width and height. 
+        /// </summary>
         [TestMethod]
         public void Execute_RectangleSuccess_WithLiteralWidthAndHeight()
         {
@@ -44,6 +53,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             Assert.AreEqual(100, rectangle.width);
         }
 
+        /// <summary>
+        /// Test method ensuring a rectangle is drawn using a variable for both width and height.
+        /// </summary>
         [TestMethod]
         public void Execute_RectangleSuccess_WithVariableWidthAndHeight()
         {
@@ -63,6 +75,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             Assert.AreEqual(100, rectangle.height);
         }
 
+        /// <summary>
+        /// Test method ensuring a rectangle is drawn using a variable for the width only. 
+        /// </summary>
         [TestMethod]
         public void Execute_RectangleSuccess_WithVariableWidth()
         {
@@ -81,6 +96,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             Assert.AreEqual(100, rectangle.height);
         }
 
+        /// <summary>
+        /// Test method ensuring the rectangle isn't drawn when command is passed and syntax mode is true.
+        /// </summary>
         [TestMethod]
         public void Execute_RectangleSuccess_SyntaxCheck()
         {
@@ -94,6 +112,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             Assert.AreEqual(0, shapeFactory.shapes.Count());
         }
 
+        /// <summary>
+        /// Ensures a parameter count exception is thrown if too few parameters are passed. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidParameterCountException))]
         public void Execute_ThrowsException_InvalidParameterCountException()
@@ -105,6 +126,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             rectangleCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Ensures a parameter count exception is thrown if too few dimensions are passed. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidParameterCountException))]
         public void Execute_ThrowsException_InvalidParameterCountException_NotEnoughDimensions()
@@ -116,6 +140,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             rectangleCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Ensures a parameter count exception is thrown if an empty string is passed as a dimension. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidParameterCountException))]
         public void Execute_ThrowsException_InvalidParameterCountException_EmptyStringPassedAsDimension()
@@ -127,6 +154,9 @@ namespace SE4_Drawing_ProgramTests.CommandsTest
             rectangleCommand.Execute(shapeFactory, parameters, false);
         }
 
+        /// <summary>
+        /// Ensures a command exception is thrown if an invalid value is passed as the dimension. 
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(CommandException))]
         public void Execute_ThrowsException_CommandException_InvalidValuePassedAsDimension()

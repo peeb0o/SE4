@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace SE4
 {
-    interface Shapes
+    /// <summary>
+    /// Shapes interface
+    /// </summary>
+    interface IShapes
     {
-        void draw(Graphics g);
+        void Draw(Graphics g);
     }
 }
